@@ -1,11 +1,4 @@
-function restaurants(state = [], action) {
-  if (action.type === "ADD_RESTAURANT_REVIEW") {
-    return state.concat([action.review]);
-  }
-
-  return state;
-}
-
+// LIBRARY CODE
 function createStore() {
   let state;
   let listeners = [];
@@ -17,15 +10,29 @@ function createStore() {
       listeners = listeners.filter((l) => l !== listener);
     };
   };
-  const dispatch = () => {};
+
+  const dispatch = (action) => {
+    state = reducer(state, action);
+    listeners.forEach((listener) => listener());
+  };
 
   return {
     getState,
     subscribe,
+    dispatch,
   };
 }
 
-const store = createStore();
+// APP CODE
+function restaurants(state = [], action) {
+  if (action.type === "ADD_RESTAURANT_REVIEW") {
+    return state.concat([action.review]);
+  }
+
+  return state;
+}
+
+const store = createStore(restaurants);
 store.subscribe(() => {
   console.log("The new state is:", store.getState());
 });
