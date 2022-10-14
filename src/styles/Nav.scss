@@ -1,0 +1,11 @@
+@use "./index.scss";
+
+.nav {
+  justify-content: center;
+  padding: 0.5rem;
+  border-bottom: 1px solid index.$clr-dark;
+}
+
+.nav-links {
+  justify-content: stretch;
+}
