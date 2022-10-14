@@ -1,5 +1,5 @@
 // LIBRARY CODE
-function createStore() {
+function createStore(reducer) {
   let state;
   let listeners = [];
 
@@ -33,6 +33,7 @@ function restaurants(state = [], action) {
 }
 
 const store = createStore(restaurants);
+
 store.subscribe(() => {
   console.log("The new state is:", store.getState());
 });
