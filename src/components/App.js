@@ -5,11 +5,14 @@ import RestaurantProfile from "./RestaurantProfile";
 import UserProfile from "./UserProfile";
 import RestaurantCharts from "./RestaurantCharts";
 import MyRestaurants from "./MyRestaurants";
-import "../styles/App.css";
+import Nav from "./Nav";
+
+import "../styles/App.scss";
 
 function App() {
   return (
     <div className="App">
+      <Nav />
       <Routes>
         <Route path="/" exact element={<Dashboard />} />
         <Route path="/restaurantProfile/:id" element={<RestaurantProfile />} />
