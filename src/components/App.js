@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 
 import Dashboard from "./Dashboard";
-import RestaurantProfile from "./RestaurantProfile";
+import RecipeProfile from "./RecipeProfile";
 import UserProfile from "./UserProfile";
-import RestaurantCharts from "./RestaurantCharts";
-import MyRestaurants from "./MyRestaurants";
+import RecipeCharts from "./RecipeCharts";
+import MyRecipes from "./MyRecipes";
 import Nav from "./Nav";
 
 import "../styles/App.scss";
@@ -15,10 +15,10 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" exact element={<Dashboard />} />
-        <Route path="/restaurantProfile/:id" element={<RestaurantProfile />} />
+        <Route path="/recipeProfile/:id" element={<RecipeProfile />} />
         <Route path="userProfile/:userId" element={<UserProfile />} />
-        <Route path="restaurantCharts" element={<RestaurantCharts />} />
-        <Route path="myRestaurants" element={<MyRestaurants />} />
+        <Route path="recipeCharts" element={<RecipeCharts />} />
+        <Route path="myRecipes" element={<MyRecipes />} />
       </Routes>
     </div>
   );

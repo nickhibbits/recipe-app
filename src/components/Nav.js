@@ -15,10 +15,10 @@ function Nav() {
             <Link to={"userProfile/:userId"}>User Profile</Link>
           </li>
           <li className="nav-link">
-            <Link to={"restaurantCharts"}>Charts </Link>
+            <Link to={"recipeCharts"}>Charts </Link>
           </li>
           <li className="nav-link">
-            <Link to={"myRestaurants"}>My Restaurants</Link>
+            <Link to={"myRecipes"}>My Recipes</Link>
           </li>
         </ul>
       </nav>
