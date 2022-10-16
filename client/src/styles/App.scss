@@ -4,5 +4,10 @@
 }
 
 .component {
+  margin: 0 3rem 0 3rem;
+  @media only screen and (min-width: 800px) {
+    margin: 0 12rem 0 12rem;
+  }
+  padding-top: 3rem;
   grid-row: 2 / 3;
 }
