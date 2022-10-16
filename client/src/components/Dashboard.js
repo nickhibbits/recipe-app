@@ -32,7 +32,7 @@ function Dashboard() {
   };
 
   return (
-    <main className="dashboard-component">
+    <main className="dashboard-component component">
       <h1 className="page-heading">Dashboard</h1>
       <RecipeScrollContainer recipes={popularRecipes} categoryTitle="Popular" />
       <RecipeScrollContainer recipes={myRecipes} categoryTitle="My Recipes" />
