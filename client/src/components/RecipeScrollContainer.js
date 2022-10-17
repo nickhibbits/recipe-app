@@ -11,7 +11,7 @@ function RecipeScrollContainer({ recipes, categoryTitle }) {
         {Object.values(recipes).map((recipe) => {
           return (
             <li className="recipe-card-wrapper">
-              <Link>
+              <Link to={"/recipeProfile/:id"}>
                 <div className="recipe-card flex-column">
                   <h3 className="recipe-title">{recipe.title}</h3>
                   <p className="recipe-short-description">
