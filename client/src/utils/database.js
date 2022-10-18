@@ -1,4 +1,4 @@
-// mock database acting as placeholder for MongoDb, Firebase, etc
+// mock database acting as placeholder for MongoDb, etc
 const users = {
   nickhibbits: {
     fullName: "Nicholas Hibbits",

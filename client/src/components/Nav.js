@@ -11,9 +11,14 @@ function Nav(props) {
   return (
     <header>
       <nav className="nav flex">
-        <p className="logged-in-user">
-          Logged in as <strong>{props.user.username}</strong>
-        </p>
+        {props.user ? (
+          <p className="logged-in-user">
+            Logged in as <strong>{props.user.username}</strong>
+          </p>
+        ) : (
+          <p className="logged-in-user">Loading</p>
+        )}
+
         <ul className="nav-links flex-row">
           <li className="nav-link">
             <Link to={"/"}>Dashboard</Link>

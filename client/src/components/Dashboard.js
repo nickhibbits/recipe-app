@@ -23,15 +23,15 @@ function Dashboard() {
   };
 
   const myRecipes = {
-    1: {
+    3: {
       title: "Beef Liver",
       description: "For growing boys.",
-      id: 1,
+      id: 3,
     },
-    2: {
+    4: {
       title: "Lentil Soup",
       description: "That strange color you can't resist.",
-      id: 2,
+      id: 4,
     },
   };
 
