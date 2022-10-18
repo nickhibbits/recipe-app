@@ -10,7 +10,7 @@ function RecipeScrollContainer({ recipes, categoryTitle }) {
       <ul className="recipes-list flex-row">
         {Object.values(recipes).map((recipe) => {
           return (
-            <li className="recipe-card-wrapper">
+            <li className="recipe-card-wrapper" key={recipe.id}>
               <Link to={"/recipeProfile/:id"}>
                 <div className="recipe-card flex-column">
                   <h3 className="recipe-title">{recipe.title}</h3>

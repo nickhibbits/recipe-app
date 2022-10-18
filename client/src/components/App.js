@@ -1,4 +1,7 @@
 import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { handleInitialData } from "../actions/shared";
 
 import Dashboard from "./Dashboard";
 import RecipeProfile from "./RecipeProfile";
@@ -9,7 +12,11 @@ import Nav from "./Nav";
 
 import "../styles/App.scss";
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    props.dispatch(handleInitialData());
+  });
+
   return (
     <div className="App">
       <Nav />
@@ -24,4 +31,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect()(App);

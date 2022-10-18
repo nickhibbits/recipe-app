@@ -1,8 +1,12 @@
+import { getUsers } from "../utils/database";
+
+import { receiveUsers } from "./users";
+
 export function handleInitialData() {
-  return (dispatch) => {
-    return getInitialData().then(({ users, recipes }) => {
+  return async (dispatch) => {
+    await getUsers().then((users) => {
       console.log("users", users);
-      console.log("recipes", recipes);
+      dispatch(receiveUsers(users));
     });
   };
 }
