@@ -1,12 +1,19 @@
-import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+
+import React from "react";
 
 import "../styles/Nav.scss";
 
-function Nav() {
+function Nav(props) {
+  console.log("user", props.user);
+  console.log("props", props);
   return (
     <header>
       <nav className="nav flex">
+        <p className="logged-in-user">
+          Logged in as <strong>{props.user.username}</strong>
+        </p>
         <ul className="nav-links flex-row">
           <li className="nav-link">
             <Link to={"/"}>Dashboard</Link>
@@ -26,4 +33,11 @@ function Nav() {
   );
 }
 
-export default Nav;
+function mapStateToProps({ users }) {
+  console.log("users", users);
+  return {
+    user: Object.values(users)[0],
+  };
+}
+
+export default connect(mapStateToProps)(Nav);

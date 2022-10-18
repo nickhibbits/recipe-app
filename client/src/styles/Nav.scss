@@ -1,7 +1,7 @@
 @use "./index.scss";
 
 .nav {
-  justify-content: center;
+  justify-content: space-around;
   padding: 0.5rem;
   border-bottom: 1px solid index.$clr-dark;
 }
