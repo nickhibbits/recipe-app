@@ -3,7 +3,7 @@ import RecipeScrollContainer from "./RecipeScrollContainer";
 
 function Dashboard() {
   // useEffect(() => {
-  //   fetch("/getRecipes")
+  //   fetch("/getRecipeCategories")
   //     .then((res) => res.json())
   //     .then((data) => console.log("DATA", data));
   // }, []);

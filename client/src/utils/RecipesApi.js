@@ -1,5 +1,5 @@
-export async function getRecipes() {
-  const recipes = await fetch("./getRecipes")
+export async function getRecipesByCategory() {
+  const recipes = await fetch("./getRecipeCategories")
     .then((response) => response.json())
     .then((final) => {
       return final;

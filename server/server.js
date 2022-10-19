@@ -8,38 +8,26 @@ app.listen(5001, () => {
   console.log("server running on port 5001");
 });
 
-app.get("/getRecipes", async (req, res) => {
-  // res.json({ recipes: ["1", "2", "3"] });
+async function fetchRecipeCategory(cuisine, resultCount) {
+  let url = `https://api.spoonacular.com/recipes/complexSearch?cuisine=${cuisine}&number=${resultCount}&apiKey=${process.env.API_KEY}`;
 
-  let recipes = {};
-
-  const promise1 = await fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?cuisine=American&number=8&apiKey=${process.env.API_KEY}`
-  )
+  return await fetch(url)
     .then((response) => response.json())
     .then((data) => {
       const recipeCategory = {
-        cuisine: "American",
+        cuisine,
         recipes: data.results,
       };
       return recipeCategory;
     });
+}
 
-  const promise2 = await fetch(
-    `https://api.spoonacular.com/recipes/complexSearch?cuisine=African&number=8&apiKey=${process.env.API_KEY}`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("data.results", data.results);
-      const recipeCategory = {
-        cuisine: "African",
-        recipes: data.results,
-      };
+app.get("/getRecipeCategories", async (req, res) => {
+  const americanRecipes = fetchRecipeCategory("American", 8);
+  const thaiRecipes = fetchRecipeCategory("Thai", 8);
+  const africanRecipes = fetchRecipeCategory("African", 8);
 
-      return recipeCategory;
-    });
-
-  Promise.all([promise1, promise2]).then((values) => {
+  Promise.all([americanRecipes, thaiRecipes, africanRecipes]).then((values) => {
     console.log("values", values);
     res.send(values);
   });
