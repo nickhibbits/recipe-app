@@ -3,13 +3,12 @@ import { RECEIVE_RECIPES } from "../actions/recipes";
 export function recipes(state = {}, action) {
   switch (action.type) {
     case RECEIVE_RECIPES:
-      const recipes = action.recipes;
-      console.log("recipes", recipes);
-      console.log(typeof recipes);
-      console.log(action);
+      const recipeCategories = action.recipes;
+      console.log("recipes", recipeCategories);
       return {
         ...state,
-        recipes,
+        [recipeCategories[0].cuisine]: recipeCategories[0].recipes,
+        [recipeCategories[1].cuisine]: recipeCategories[1].recipes,
         // recipes: [...action.recipes],
       };
 
