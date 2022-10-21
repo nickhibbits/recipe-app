@@ -1,47 +1,32 @@
 // import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import RecipeScrollContainer from "./RecipeScrollContainer";
 
-function Dashboard() {
-  // useEffect(() => {
-  //   fetch("/getRecipeCategories")
-  //     .then((res) => res.json())
-  //     .then((data) => console.log("DATA", data));
-  // }, []);
-
-  // load and hanlde these in the redux store on login
-  const popularRecipes = {
-    1: {
-      title: "Stew",
-      description: "Yummy fall dish.",
-      id: 1,
-    },
-    2: {
-      title: "Beans and Mash",
-      description: "You know you want it.",
-      id: 2,
-    },
-  };
-
-  const myRecipes = {
-    3: {
-      title: "Beef Liver",
-      description: "For growing boys.",
-      id: 3,
-    },
-    4: {
-      title: "Lentil Soup",
-      description: "That strange color you can't resist.",
-      id: 4,
-    },
-  };
+function Dashboard({ recipeCategories }) {
+  const categoryTitles = Object.keys(recipeCategories);
 
   return (
     <main className="dashboard-component component">
       <h1 className="page-heading">Dashboard</h1>
-      <RecipeScrollContainer recipes={popularRecipes} categoryTitle="Popular" />
-      <RecipeScrollContainer recipes={myRecipes} categoryTitle="My Recipes" />
+      {Object.values(recipeCategories).map((category, i) => {
+        // console.log("category 🎃", category);
+        return (
+          <RecipeScrollContainer
+            recipes={category}
+            categoryTitle={categoryTitles[i]}
+            key={i}
+          />
+        );
+      })}
+      {/* <RecipeScrollContainer recipes={} categoryTitle="Popular" />
+      <RecipeScrollContainer recipes={} categoryTitle="My Recipes" /> */}
     </main>
   );
 }
 
-export default Dashboard;
+const mapStateToProps = ({ recipeCategories }) => {
+  return {
+    recipeCategories,
+  };
+};
+export default connect(mapStateToProps)(Dashboard);
