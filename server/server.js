@@ -22,6 +22,24 @@ async function fetchRecipeCategory(cuisine, resultCount) {
     });
 }
 
+async function fetchRecipeInfo(id) {
+  const getIngredients = await fetch(
+    `https://api.spoonacular.com/recipes/${id}/information&apiKey=${process.env.API_KEY}`
+  )
+    .then((res) => res.json())
+    .then((ingredients) => ingredients);
+
+  const getRecipeSummary = await fetch(
+    `https://api.spoonacular.com/recipes/${id}/summary&apiKey=${process.env.API_KEY}`
+  )
+    .then((res) => res.json())
+    .then((summary) => summary);
+
+  return Promise.all([getIngredients, getRecipeSummary]).then((payload) => {
+    return payload;
+  });
+}
+
 app.get("/getRecipeCategories", async (req, res) => {
   const americanRecipes = fetchRecipeCategory("American", 8);
   const thaiRecipes = fetchRecipeCategory("Thai", 8);
@@ -30,5 +48,12 @@ app.get("/getRecipeCategories", async (req, res) => {
   Promise.all([americanRecipes, thaiRecipes, africanRecipes]).then((values) => {
     console.log("values", values);
     res.send(values);
+  });
+});
+
+app.get("/getRecipe", async (req, res) => {
+  await fetchRecipeInfo().then((info) => {
+    console.log("recipeInfo 🍔", info);
+    res.send(info);
   });
 });

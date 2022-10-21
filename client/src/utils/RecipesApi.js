@@ -1,9 +1,14 @@
 export async function getRecipeCategories() {
-  const recipes = await fetch("./getRecipeCategories")
+  await fetch("./getRecipeCategories")
     .then((response) => response.json())
-    .then((final) => {
-      return final;
+    .then((recipeCategories) => {
+      console.log("recipeCategories", recipeCategories);
+      return recipeCategories;
     });
+}
 
-  return recipes;
+export async function getRecipe(id) {
+  await fetch("./getRecipe")
+    .then((response) => response.json())
+    .then((recipe) => recipe);
 }

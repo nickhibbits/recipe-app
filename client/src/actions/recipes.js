@@ -1,11 +1,19 @@
-export const RECEIVE_RECIPES = "RECEIVE_RECIPES";
+import { getRecipe } from "../utils/RecipesApi";
+
+export const RECEIVE_RECIPE = "RECEIVE_RECIPE";
 export const SAVE_RECIPE = "SAVE_RECIPE";
 export const REMOVE_RECIPE = "REMOVE_RECIPE";
 
-export function receiveRecipes(recipes) {
+export function handleReceiveRecipe(id) {
+  return async (dispatch) => {
+    await getRecipe(id).then((recipe) => dispatch(receiveRecipe(recipe)));
+  };
+}
+
+function receiveRecipe(recipe) {
   return {
-    type: RECEIVE_RECIPES,
-    recipes,
+    type: RECEIVE_RECIPE,
+    recipe,
   };
 }
 

@@ -13,9 +13,10 @@ import Nav from "./Nav";
 import "../styles/App.scss";
 
 function App(props) {
+  const { dispatch } = props;
   useEffect(() => {
-    props.dispatch(handleInitialData());
-  });
+    dispatch(handleInitialData());
+  }, [dispatch]);
 
   return (
     <div className="App">
