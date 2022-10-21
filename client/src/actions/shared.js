@@ -1,8 +1,8 @@
 import { getUsers } from "../utils/database";
-import { getRecipesByCategory } from "../utils/RecipesApi";
+import { getRecipeCategories } from "../utils/RecipesApi";
 
 import { receiveUsers } from "./users";
-import { receiveRecipesByCategory } from "./recipes";
+import { receiveRecipeCategories } from "./recipeCategories";
 
 export function handleInitialData() {
   return async (dispatch) => {
@@ -11,9 +11,9 @@ export function handleInitialData() {
       dispatch(receiveUsers(users));
     });
 
-    await getRecipesByCategory().then((recipeCategories) => {
+    await getRecipeCategories().then((recipeCategories) => {
       console.log("recipeCategories", recipeCategories);
-      dispatch(receiveRecipesByCategory(recipeCategories));
+      dispatch(receiveRecipeCategories(recipeCategories));
     });
   };
 }

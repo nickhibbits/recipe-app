@@ -13,6 +13,7 @@ const _store = {
     password: "",
     dateCreated: "",
   },
+  recipeCategories: {},
   recipes: {
     recipeId: {
       recipeId: "",
