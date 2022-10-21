@@ -3,15 +3,21 @@
   align-items: flex-start;
 }
 
+.recipes-list {
+  // flex-wrap: wrap;
+  height: auto;
+}
+
 .recipe-card-wrapper {
   outline: solid 2px green;
   border-radius: 10px;
-  padding: 1rem;
+  // padding: 1rem;
 }
 
 .recipe-card {
   gap: 0;
   align-items: flex-start;
+  min-height: 8rem;
 }
 
 .recipes-list > * {

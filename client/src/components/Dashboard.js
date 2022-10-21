@@ -9,7 +9,6 @@ function Dashboard({ recipeCategories }) {
     <main className="dashboard-component component">
       <h1 className="page-heading">Dashboard</h1>
       {Object.values(recipeCategories).map((category, i) => {
-        // console.log("category 🎃", category);
         return (
           <RecipeScrollContainer
             recipes={category}
@@ -18,8 +17,6 @@ function Dashboard({ recipeCategories }) {
           />
         );
       })}
-      {/* <RecipeScrollContainer recipes={} categoryTitle="Popular" />
-      <RecipeScrollContainer recipes={} categoryTitle="My Recipes" /> */}
     </main>
   );
 }

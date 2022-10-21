@@ -11,14 +11,13 @@ function RecipeScrollContainer({ recipes, categoryTitle }) {
         {Object.values(recipes).map((recipe, i) => {
           return (
             <li className="recipe-card-wrapper" key={recipe.id}>
-              <Link to={"/recipeProfile/:id"}>
+              <Link to={`/recipeProfile/:${recipe.id}`}>
                 <div
                   className="recipe-card flex-column"
                   style={{
                     background: `url(${recipe.image}) no-repeat`,
                     backgroundSize: "contain",
-                    height: "300px",
-                    // backgrou
+                    height: "100%",
                   }}
                 >
                   <h3 className="recipe-title">{recipe.title}</h3>
