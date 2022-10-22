@@ -6,7 +6,9 @@ export const REMOVE_RECIPE = "REMOVE_RECIPE";
 
 export function handleReceiveRecipe(id) {
   return async (dispatch) => {
-    await getRecipe(id).then((recipe) => dispatch(receiveRecipe(recipe)));
+    await getRecipe(id).then((recipeInfo) =>
+      dispatch(receiveRecipe(recipeInfo))
+    );
   };
 }
 

@@ -33,15 +33,7 @@ async function fetchRecipeInfo(id) {
     .then((ingredients) => ingredients)
     .catch((err) => console.log("ERROR 🛑", err));
 
-  const getRecipeSummary = await fetch(
-    `https://api.spoonacular.com/recipes/${id}/summary?apiKey=${process.env.API_KEY}`
-  )
-    .then((res) => res.json())
-    .then((summary) => summary);
-
-  return Promise.all([getIngredients, getRecipeSummary]).then((payload) => {
-    return payload;
-  });
+  return getIngredients;
 }
 
 app.get("/getRecipeCategories", async (req, res) => {

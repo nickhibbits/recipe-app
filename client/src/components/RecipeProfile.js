@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
+import { handleReceiveRecipe } from "../actions/recipe";
+import { Interweave } from "interweave";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { handleReceiveRecipe } from "../actions/recipes";
 
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {
@@ -18,16 +19,24 @@ const withRouter = (Component) => {
 function RecipeProfile(props) {
   const { id } = props.router.params;
   const { dispatch } = props;
+  const { title, instructions, imageSrc } = props.recipe;
 
   useEffect(() => {
     dispatch(handleReceiveRecipe(id));
   }, [id, dispatch]);
 
   return (
-    <div>
-      RecipeProfile - page containing Recipe details and reviews -- make area to
-      write review and an area to see all reviews
-    </div>
+    <main className="recipe-profile-component component">
+      <h1 className="title">{title}</h1>
+      <div className="recipe-info-container">
+        <div className="image-wrapper">
+          <img src={imageSrc} alt="" className="recipe-image" />
+        </div>
+        <section className="recipe-text-wrapper">
+          <Interweave content={instructions} />
+        </section>
+      </div>
+    </main>
   );
 }
 
