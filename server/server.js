@@ -3,6 +3,9 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const fetch = require("node-fetch");
+const bodyParser = require("body-parser");
+
+var jsonParser = bodyParser.json();
 
 app.listen(5001, () => {
   console.log("server running on port 5001");
@@ -24,13 +27,14 @@ async function fetchRecipeCategory(cuisine, resultCount) {
 
 async function fetchRecipeInfo(id) {
   const getIngredients = await fetch(
-    `https://api.spoonacular.com/recipes/${id}/information&apiKey=${process.env.API_KEY}`
+    `https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.API_KEY}`
   )
     .then((res) => res.json())
-    .then((ingredients) => ingredients);
+    .then((ingredients) => ingredients)
+    .catch((err) => console.log("ERROR 🛑", err));
 
   const getRecipeSummary = await fetch(
-    `https://api.spoonacular.com/recipes/${id}/summary&apiKey=${process.env.API_KEY}`
+    `https://api.spoonacular.com/recipes/${id}/summary?apiKey=${process.env.API_KEY}`
   )
     .then((res) => res.json())
     .then((summary) => summary);
@@ -46,14 +50,13 @@ app.get("/getRecipeCategories", async (req, res) => {
   const africanRecipes = fetchRecipeCategory("African", 8);
 
   Promise.all([americanRecipes, thaiRecipes, africanRecipes]).then((values) => {
-    console.log("values", values);
     res.send(values);
   });
 });
 
-app.get("/getRecipe", async (req, res) => {
-  await fetchRecipeInfo().then((info) => {
-    console.log("recipeInfo 🍔", info);
+app.post("/recipeProfile/getRecipe", jsonParser, async (req, res) => {
+  await fetchRecipeInfo(req.body.id.substring(1)).then((info) => {
+    // console.log("recipeInfo 🍔", info);
     res.send(info);
   });
 });

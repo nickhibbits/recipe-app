@@ -18,9 +18,11 @@ const withRouter = (Component) => {
 function RecipeProfile(props) {
   const { id } = props.router.params;
   const { dispatch } = props;
+
   useEffect(() => {
     dispatch(handleReceiveRecipe(id));
   }, [id, dispatch]);
+
   return (
     <div>
       RecipeProfile - page containing Recipe details and reviews -- make area to
@@ -29,9 +31,10 @@ function RecipeProfile(props) {
   );
 }
 
-const mapStateToProps = ({ recipeCategories, user }) => {
+const mapStateToProps = ({ recipeCategories, user, recipe }) => {
   return {
     recipeCategories,
+    recipe,
   };
 };
 export default withRouter(connect(mapStateToProps)(RecipeProfile));
