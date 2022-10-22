@@ -1,6 +1,7 @@
 .App {
   display: grid;
-  grid-template-rows: 1fr 95vh;
+  grid-template-rows: 1fr;
+  overflow-y: scroll;
 }
 
 .component {

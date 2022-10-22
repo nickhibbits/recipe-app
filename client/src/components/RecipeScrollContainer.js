@@ -10,23 +10,23 @@ function RecipeScrollContainer({ recipes, categoryTitle }) {
       <ul className="recipes-list">
         {Object.values(recipes).map((recipe, i) => {
           return (
-            <li className="recipe-card-wrapper" key={recipe.id}>
-              <Link to={`/recipeProfile/:${recipe.id}`}>
-                <div
-                  className="recipe-card flex-column"
-                  style={{
-                    background: `url(${recipe.image}) no-repeat`,
-                    backgroundSize: "contain",
-                    height: "100%",
-                  }}
-                >
-                  <h3 className="recipe-title">{recipe.title}</h3>
-                  <p className="recipe-short-description">
-                    {recipe.description}
-                  </p>
-                </div>
-              </Link>
-            </li>
+            <Link to={`/recipeProfile/:${recipe.id}`} key={recipe.id}>
+              <li
+                className="recipe-card flex"
+                style={{
+                  backgroundImage: `linear-gradient(
+                  rgba(0, 0, 0, 0.25),
+                  rgba(0, 0, 0, 0.25)
+                ), url(${recipe.image})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  maxWidth: "100%",
+                }}
+              >
+                <h3 className="recipe-title">{recipe.title}</h3>
+                <p className="recipe-short-description">{recipe.description}</p>
+              </li>
+            </Link>
           );
         })}
       </ul>
