@@ -5,9 +5,9 @@ import "../styles/RecipeScrollContainer.scss";
 
 function RecipeScrollContainer({ recipes, categoryTitle }) {
   return (
-    <main className="recipe-scroll-container-component flex-column">
+    <main className="recipe-scroll-container-component ">
       <h2 className="category-title">{categoryTitle}</h2>
-      <ul className="recipes-list flex-row">
+      <ul className="recipes-list">
         {Object.values(recipes).map((recipe, i) => {
           return (
             <li className="recipe-card-wrapper" key={recipe.id}>
