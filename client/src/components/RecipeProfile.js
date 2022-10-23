@@ -5,6 +5,7 @@ import { handleReceiveRecipe } from "../actions/recipe";
 import { Interweave } from "interweave";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
+import "../styles/RecipeProfile.scss";
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {
     let location = useLocation();
@@ -19,7 +20,7 @@ const withRouter = (Component) => {
 function RecipeProfile(props) {
   const { id } = props.router.params;
   const { dispatch } = props;
-  const { title, instructions, imageSrc } = props.recipe;
+  const { title, instructions, image, summary } = props.recipe;
 
   useEffect(() => {
     dispatch(handleReceiveRecipe(id));
@@ -27,15 +28,16 @@ function RecipeProfile(props) {
 
   return (
     <main className="recipe-profile-component component">
-      <h1 className="title">{title}</h1>
-      <div className="recipe-info-container">
-        <div className="image-wrapper">
-          <img src={imageSrc} alt="" className="recipe-image" />
-        </div>
+      <div className="recipe-info-wrapper">
+        <h1 className="title">{title}</h1>
         <section className="recipe-text-wrapper">
-          <Interweave content={instructions} />
+          <h3 className="recipe-instructions-title">Instructions</h3>
+          <Interweave content={instructions ?? summary} />
         </section>
       </div>
+      {/* <div className="recipe-image-wrapper"> */}
+      <img src={image} alt="recipe" className="recipe-image" />
+      {/* </div> */}
     </main>
   );
 }

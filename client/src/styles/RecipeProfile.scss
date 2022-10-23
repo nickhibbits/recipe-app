@@ -1,0 +1,13 @@
+.recipe-profile-component {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 50%;
+  grid-template-rows: 80vh;
+  gap: 2rem;
+  align-items: center;
+}
+
+.recipe-info-wrapper > h1 {
+  margin-bottom: 1rem;
+  text-decoration: underline;
+}
