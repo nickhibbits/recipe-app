@@ -10,29 +10,30 @@ function Nav(props) {
   console.log("props", props);
   return (
     <header>
-      <nav className="nav flex">
-        {props.user ? (
-          <p className="logged-in-user">
-            Logged in as <strong>{props.user.username}</strong>
-          </p>
-        ) : (
-          <p className="logged-in-user">Loading</p>
-        )}
-
-        <ul className="nav-links flex-row">
-          <li className="nav-link">
-            <Link to={"/"}>Dashboard</Link>
-          </li>
-          <li className="nav-link">
-            <Link to={"userProfile/:userId"}>User Profile</Link>
-          </li>
-          <li className="nav-link">
-            <Link to={"recipeCharts"}>Charts </Link>
-          </li>
-          <li className="nav-link">
-            <Link to={"myRecipes"}>My Recipes</Link>
-          </li>
-        </ul>
+      <nav className="nav">
+        <div className="nav-contents-wrapper ">
+          {props.user ? (
+            <p className="logged-in-user">
+              Logged in as <strong>{props.user.username}</strong>
+            </p>
+          ) : (
+            <p className="logged-in-user">Loading</p>
+          )}
+          <ul className="nav-links flex-row">
+            <li className="nav-link">
+              <Link to={"/"}>Dashboard</Link>
+            </li>
+            <li className="nav-link">
+              <Link to={"userProfile/:userId"}>User Profile</Link>
+            </li>
+            <li className="nav-link">
+              <Link to={"recipeCharts"}>Charts </Link>
+            </li>
+            <li className="nav-link">
+              <Link to={"myRecipes"}>My Recipes</Link>
+            </li>
+          </ul>
+        </div>
       </nav>
     </header>
   );

@@ -1,6 +1,15 @@
 $clr-dark: #000000;
 $clr-light: #ffffff;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+$margin-desktop: 13.25rem;
+$margin: 3rem;
+
 h1,
 h2,
 h3,

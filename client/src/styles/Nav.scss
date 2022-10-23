@@ -1,11 +1,16 @@
 @use "./index.scss";
 
 .nav {
-  justify-content: space-around;
-  padding: 0.5rem;
+  padding-block: 0.5rem;
+  padding-inline: index.$margin;
+  @media only screen and (min-width: 1200px) {
+    padding-inline: index.$margin-desktop;
+  }
   border-bottom: 1px solid index.$clr-dark;
 }
 
-.nav-links {
-  justify-content: stretch;
+.nav-contents-wrapper {
+  // border: solid 2px red;
+  display: flex;
+  justify-content: space-between;
 }

@@ -1,3 +1,5 @@
+@use "./index.scss";
+
 .App {
   display: grid;
   grid-template-rows: 1fr;
@@ -5,9 +7,9 @@
 }
 
 .component {
-  margin: 0 3rem 0 3rem;
-  @media only screen and (min-width: 800px) {
-    margin: 0 12rem 0 12rem;
+  margin-inline: 3rem;
+  @media only screen and (min-width: 1200px) {
+    margin-inline: index.$margin-desktop;
   }
   padding-top: 3rem;
   grid-row: 2 / 3;
