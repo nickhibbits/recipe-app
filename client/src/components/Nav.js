@@ -5,16 +5,15 @@ import React from "react";
 
 import "../styles/Nav.scss";
 
-function Nav(props) {
-  console.log("user", props.user);
-  console.log("props", props);
+function Nav({ auth }) {
+  console.log("auth", auth);
   return (
     <header>
       <nav className="nav">
         <div className="nav-contents-wrapper ">
-          {props.user ? (
+          {typeof auth.loggedIn ? (
             <p className="logged-in-user">
-              Logged in as <strong>{props.user.username}</strong>
+              Logged in as <strong>{auth.loggedIn}</strong>
             </p>
           ) : (
             <p className="logged-in-user">Loading</p>
@@ -39,11 +38,11 @@ function Nav(props) {
   );
 }
 
-function mapStateToProps({ users, authedUser }) {
-  console.log("users", users);
+function mapStateToProps({ auth }) {
+  console.log("auth", auth);
 
   return {
-    user: Object.values(users).find((user) => user.username === authedUser),
+    auth,
   };
 }
 

@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 
@@ -15,15 +15,17 @@ import "../styles/App.scss";
 
 function App(props) {
   const { dispatch } = props;
+  const [authedUser, setAuthedUser] = useState(false);
+
   useEffect(() => {
     dispatch(handleInitialData());
   }, [dispatch]);
 
-  if (!props.loggedIn) {
-    return <Login />;
+  if (!authedUser) {
+    return <Login setAuth={() => setAuthedUser((authedUser) => !authedUser)} />;
   }
 
-  if (props.loggedIn) {
+  if (authedUser) {
     return (
       <div className="App">
         <Nav />
@@ -39,10 +41,4 @@ function App(props) {
   }
 }
 
-const mapStateToProps = ({ authedUser }) => {
-  return {
-    loggedIn: authedUser,
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);
