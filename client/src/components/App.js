@@ -4,11 +4,12 @@ import { connect } from "react-redux";
 import { handleInitialData } from "../actions/shared";
 
 import Dashboard from "./Dashboard";
-import RecipeProfile from "./RecipeProfile";
-import UserProfile from "./UserProfile";
-import RecipeCharts from "./RecipeCharts";
+import Login from "./Login";
 import MyRecipes from "./MyRecipes";
 import Nav from "./Nav";
+import RecipeProfile from "./RecipeProfile";
+import RecipeCharts from "./RecipeCharts";
+import UserProfile from "./UserProfile";
 
 import "../styles/App.scss";
 
@@ -18,18 +19,30 @@ function App(props) {
     dispatch(handleInitialData());
   }, [dispatch]);
 
-  return (
-    <div className="App">
-      <Nav />
-      <Routes>
-        <Route path="/" exact element={<Dashboard />} />
-        <Route path="/recipeProfile/:id" element={<RecipeProfile />} />
-        <Route path="userProfile/:userId" element={<UserProfile />} />
-        <Route path="recipeCharts" element={<RecipeCharts />} />
-        <Route path="myRecipes" element={<MyRecipes />} />
-      </Routes>
-    </div>
-  );
+  if (!props.loggedIn) {
+    return <Login />;
+  }
+
+  if (props.loggedIn) {
+    return (
+      <div className="App">
+        <Nav />
+        <Routes>
+          <Route path="/" exact element={<Dashboard />} />
+          <Route path="/recipeProfile/:id" element={<RecipeProfile />} />
+          <Route path="userProfile/:userId" element={<UserProfile />} />
+          <Route path="recipeCharts" element={<RecipeCharts />} />
+          <Route path="myRecipes" element={<MyRecipes />} />
+        </Routes>
+      </div>
+    );
+  }
 }
 
-export default connect()(App);
+const mapStateToProps = ({ authedUser }) => {
+  return {
+    loggedIn: authedUser,
+  };
+};
+
+export default connect(mapStateToProps)(App);

@@ -39,10 +39,11 @@ function Nav(props) {
   );
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
   console.log("users", users);
+
   return {
-    user: Object.values(users)[0],
+    user: Object.values(users).find((user) => user.username === authedUser),
   };
 }
 
