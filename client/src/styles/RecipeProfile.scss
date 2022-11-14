@@ -1,13 +1,28 @@
 .recipe-profile-component {
+  justify-content: center;
+}
+
+.recipe-info-container {
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 50%;
-  grid-template-rows: 80vh;
+  grid-template-rows: 100%;
   gap: 2rem;
   align-items: center;
+  // border: solid 1px red;
 }
 
 .recipe-info-wrapper > h1 {
   margin-bottom: 1rem;
   text-decoration: underline;
+}
+
+.button-wrapper {
+  * {
+    min-width: 10rem;
+    cursor: pointer;
+  }
+  & button:nth-child(2) {
+    margin-left: 1rem;
+  }
 }

@@ -2,7 +2,7 @@
 
 .App {
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: 1fr 95vh;
   overflow-y: scroll;
 }
 
@@ -11,7 +11,7 @@
   @media only screen and (min-width: 1200px) {
     margin-inline: index.$margin-desktop;
   }
-  padding-top: 3rem;
+  // margin-top: 3rem;
   grid-row: 2 / 3;
   overflow-x: hidden;
 }
