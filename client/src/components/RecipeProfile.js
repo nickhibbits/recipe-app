@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
-import { handleReceiveRecipe } from "../actions/recipe";
+import { handleReceiveRecipe, handleSaveRecipe } from "../actions/recipe";
 import { Interweave } from "interweave";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import "../styles/RecipeProfile.scss";
 
@@ -40,8 +40,12 @@ function RecipeProfile(props) {
         <img src={image} alt="recipe" className="recipe-image" />
       </section>
       <section className="button-wrapper">
-        <button className="button">Save</button>
-        <button className="button">Go Back</button>
+        <button className="button" onClick={() => handleSaveRecipe()}>
+          Save
+        </button>
+        <Link to={"/"}>
+          <button className="button go-back-button">Go Back</button>
+        </Link>
       </section>
     </main>
   );

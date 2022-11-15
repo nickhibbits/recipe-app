@@ -19,7 +19,16 @@ function receiveRecipe(recipe) {
   };
 }
 
-export function saveRecipe(recipeId, user) {
+export function handleSaveRecipe(id) {
+  return async (dispatch) => {
+    // TODO write function to save recipe to user
+    await saveRecipeToDb.then((res) => {
+      dispatch(saveRecipe(id));
+    });
+  };
+}
+
+function saveRecipe(recipeId, user) {
   return {
     type: SAVE_RECIPE,
     user,
