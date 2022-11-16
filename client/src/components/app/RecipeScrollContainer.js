@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
-import "../styles/RecipeScrollContainer.scss";
+import "../../styles/RecipeScrollContainer.scss";
 
 function RecipeScrollContainer({ recipes, categoryTitle }) {
   return (

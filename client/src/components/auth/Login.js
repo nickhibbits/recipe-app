@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { setAuth } from "../actions/auth";
+import { setAuth } from "../../actions/auth";
 
-import "../styles/AuthForms.scss";
+import "../../styles/AuthForms.scss";
 
 function Login(props) {
+  console.log("yooo 🟢");
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const usernameInput = useRef();

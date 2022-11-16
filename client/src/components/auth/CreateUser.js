@@ -3,7 +3,7 @@ import React from "react";
 import { useRef, useState } from "react";
 import { connect } from "react-redux";
 
-import "../styles/AuthForms.scss";
+import "../../styles/AuthForms.scss";
 
 function CreateUser(props) {
   const [username, setUsername] = useState();

@@ -5,22 +5,41 @@ import middleware from "./middleware";
 
 export const store = configureStore({ reducer, middleware });
 
-// store structure -- utilize TS
+// Placeholder for the database
+// would the database be structured the same as the store?
+
 // const _store = {
-//   user: {
-//     fullName: "",
-//     username: "",
-//     password: "",
-//     dateCreated: "",
+//   auth: {
+//     loggedIn: true,
+//     user: "nickhibbits",
 //   },
-//   recipeCategories: {},
-//   recipes: {
-//     recipeId: {
-//       recipeId: "",
-//       recipeName: "",
-//       ingredients: {},
-//       prepDirections: {},
-//       savedBy: ["user1", "user2", "user3"],
+
+//   users: {
+//     byId: {
+//       nickhibbits: {
+//         username: "nickhibbits",
+//         password: "password1",
+//         savedRecipes: ["recipe1", "recipe2"],
+//       },
 //     },
+//     allIds: ["nickhibbits"],
+//   },
+
+//   recipes: {
+//     byId: {
+//       recipe1: {
+//         id: "recipe1",
+//         title: "Chili",
+//         ingredients: ["beans", "corn", "chips", "tomato sauce"],
+//         cuisine: "American",
+//       },
+//       recipe2: {
+//         id: "recipe2",
+//         title: "Apple Pie",
+//         ingredients: ["wheat", "sugar", "apples"],
+//         cuisine: "American",
+//       },
+//     },
+//     allIds: ["recipe1", "recipe2"],
 //   },
 // };

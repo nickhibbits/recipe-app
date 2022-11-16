@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
-import { handleReceiveRecipe, handleSaveRecipe } from "../actions/recipe";
+import { handleReceiveRecipe, handleSaveRecipe } from "../../actions/recipe";
 import { Interweave } from "interweave";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
-import "../styles/RecipeProfile.scss";
+import "../../styles/RecipeProfile.scss";
 
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {

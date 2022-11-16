@@ -1,7 +1,7 @@
 import React from "react";
 import UserInfo from "./UserInfo";
 
-import "../styles/UserProfile.scss";
+import "../../styles/UserProfile.scss";
 
 function UserProfile() {
   return (

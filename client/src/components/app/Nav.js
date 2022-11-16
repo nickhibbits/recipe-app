@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import React from "react";
 
-import "../styles/Nav.scss";
+import "../../styles/Nav.scss";
 
 function Nav({ auth }) {
   console.log("auth", auth);
