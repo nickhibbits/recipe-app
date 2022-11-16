@@ -7,8 +7,8 @@ export function auth(state = {}, action) {
       console.log("auth action", action);
       return {
         ...state,
-        loggedIn: true,
-        user: action.auth,
+        loggedIn: action.loggedIn,
+        user: action.user,
       };
 
     default:

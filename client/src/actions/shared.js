@@ -2,6 +2,7 @@ import { getUsers } from "../utils/database";
 import { receiveUsers } from "./users";
 import { getRecipeCategories } from "../utils/RecipesApi";
 import { receiveRecipeCategories } from "./recipeCategories";
+import { setAuth } from "./auth";
 
 export function handleGetUsers() {
   return async (dispatch) => {
@@ -17,6 +18,15 @@ export function handleGetInitialData() {
     await getRecipeCategories().then((recipeCategories) => {
       console.log("recipeCategories", recipeCategories);
       dispatch(receiveRecipeCategories(recipeCategories));
+    });
+  };
+}
+
+export function handleInitialLogin() {
+  return async (dispatch) => {
+    await getUsers().then((users) => {
+      dispatch(receiveUsers(users));
+      dispatch(setAuth({ user: "Me 🟣", loggedIn: false }));
     });
   };
 }
