@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { handleInitialData } from "../actions/shared";
+import { handleGetUsers, handleInitialData } from "../actions/shared";
 
+import CreateUser from "./CreateUser";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import MyRecipes from "./MyRecipes";
@@ -15,17 +16,25 @@ import "../styles/App.scss";
 
 function App(props) {
   const { dispatch } = props;
-  const [authedUser, setAuthedUser] = useState(false);
+  const [authStatus, setAuthStatus] = useState("notLoggedIn");
 
   useEffect(() => {
-    dispatch(handleInitialData());
+    dispatch(handleGetUsers());
   }, [dispatch]);
 
-  if (!authedUser) {
-    return <Login setAuth={() => setAuthedUser((authedUser) => !authedUser)} />;
+  useEffect(() => {
+    console.log("authStatus", authStatus);
+  }, [authStatus]);
+
+  if (authStatus === "notLoggedIn") {
+    return <Login setAuth={(authStatus) => setAuthStatus(authStatus)} />;
   }
 
-  if (authedUser) {
+  if (authStatus === "createUser") {
+    return <CreateUser />;
+  }
+
+  if (props.auth.loggedIn === true) {
     return (
       <div className="App">
         <Nav />
@@ -41,4 +50,10 @@ function App(props) {
   }
 }
 
-export default connect()(App);
+const mapStateToProps = ({ auth, users }) => {
+  return {
+    auth,
+    users,
+  };
+};
+export default connect(mapStateToProps)(App);

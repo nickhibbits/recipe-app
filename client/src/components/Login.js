@@ -1,18 +1,35 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { setAuth } from "../actions/auth";
 
-import "../styles/Login.scss";
+import "../styles/AuthForms.scss";
 
 function Login(props) {
   const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
   const usernameInput = useRef();
+  const passwordInput = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("username", username);
-    props.dispatch(setAuth(username));
-    props.setAuth();
+    console.log("password", password);
+    console.log("props.users", props.users);
+
+    if (!props.users.allIds.find((user) => username === user)) {
+      alert('❌ Username doesn\'t exist, click "Create" account to begin.');
+    }
+
+    if (props.users.byId[username].password !== password) {
+      alert("❌ Username doesn't match password -- Try again");
+    }
+
+    if (props.users.byId[username].password === password) {
+      console.log("Password Match 👍");
+      props.dispatch(setAuth(username));
+      props.setAuth("loggedIn");
+    }
   };
 
   return (
@@ -33,13 +50,37 @@ function Login(props) {
           </div>
           <div className="form-field-wrapper">
             <label className="password-label">Password</label>
-            <input type="text" id="password-input" />
+            <input
+              ref={passwordInput}
+              type="text"
+              id="password-input"
+              onChange={() => setPassword(passwordInput.current.value)}
+            />
           </div>
-          <input type="submit" className="submit-button" value="Submit" />
+          <div className="buttons-wrapper">
+            <input
+              type="submit"
+              className="button submit-button"
+              value="Submit"
+            />
+            <Link to={"/create-new-user"}>
+              <input
+                type="submit"
+                className="button create-account-button"
+                value="Create"
+                onClick={() => props.setAuth("createUser")}
+              />
+            </Link>
+          </div>
         </form>
       </div>
     </main>
   );
 }
 
-export default connect()(Login);
+const mapStateToProps = ({ users }) => {
+  return {
+    users,
+  };
+};
+export default connect(mapStateToProps)(Login);
