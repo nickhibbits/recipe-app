@@ -11,6 +11,8 @@ function CreateUser(props) {
   const usernameInput = useRef();
   const passwordInput = useRef();
 
+  console.log("create-user 🔻");
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Create user in database and update store");

@@ -6,11 +6,12 @@ import { setAuth } from "../../actions/auth";
 import "../../styles/AuthForms.scss";
 
 function Login(props) {
-  console.log("yooo 🟢");
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const usernameInput = useRef();
   const passwordInput = useRef();
+
+  console.log("login 🟢");
 
   const handleSubmit = (e) => {
     e.preventDefault();

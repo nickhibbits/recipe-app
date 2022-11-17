@@ -9,31 +9,16 @@ import App from "./app/App";
 import "../styles/App.scss";
 
 function Main(props) {
-  const { dispatch, auth } = props;
-  // const { loginStatus, setLoginStatus } = useState(auth.loggedIn);
-  const [loginStatus, setLoginStatus] = useState(false);
-
-  console.log("loginStatus", loginStatus);
-
-  useEffect(() => {
-    dispatch(handleInitialLogin());
-  }, [dispatch]);
-
-  if (loginStatus === false) {
-    setLoginStatus("pending");
-    return <Navigate to={"/auth/login"} />;
-  }
-
-  if (props.auth.loggedIn === true) {
-    return (
-      <div className="Main">
-        <Routes>
-          <Route path="/auth" exact element={<Auth />} />
-          <Route path="/app" exact element={<App />} />
-        </Routes>
-      </div>
-    );
-  }
+  // if (props.auth.loggedIn === true) {
+  return (
+    <div className="Main">
+      <Routes>
+        <Route path="/*" element={<App />} />
+        <Route path="/auth/*" exact element={<Auth />} />
+      </Routes>
+    </div>
+  );
+  // }
 }
 
 const mapStateToProps = ({ auth, users }) => {
