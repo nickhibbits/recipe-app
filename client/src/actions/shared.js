@@ -13,7 +13,7 @@ export function handleGetUsers() {
   };
 }
 
-export function handleGetInitialData() {
+export function handleGetRecipeCategories() {
   return async (dispatch) => {
     await getRecipeCategories().then((recipeCategories) => {
       console.log("recipeCategories", recipeCategories);

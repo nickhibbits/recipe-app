@@ -1,7 +1,10 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
-import { handleInitialLogin } from "../../actions/shared";
+import { useEffect } from "react";
+import {
+  handleGetRecipeCategories,
+  handleInitialLogin,
+} from "../../actions/shared";
 import { useLoadingCheck } from "../../utils/customHooks";
 
 import Dashboard from "./Dashboard";
@@ -21,6 +24,10 @@ function App(props) {
 
   useEffect(() => {
     dispatch(handleInitialLogin(loggedIn));
+
+    if (loggedIn === true) {
+      dispatch(handleGetRecipeCategories());
+    }
   }, [dispatch, loggedIn]);
 
   if (loading) {

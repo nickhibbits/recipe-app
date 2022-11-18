@@ -13,7 +13,7 @@ function Nav({ auth }) {
         <div className="nav-contents-wrapper ">
           {typeof auth.loggedIn ? (
             <p className="logged-in-user">
-              Logged in as <strong>{auth.loggedIn}</strong>
+              Logged in as <strong>{auth.user}</strong>
             </p>
           ) : (
             <p className="logged-in-user">Loading</p>

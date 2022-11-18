@@ -14,11 +14,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // Login Flow
 // React-Router usage
 
-// 2. Redux auth flow
-// Decide how to best initialize redux store from login screen to entering app
-// all data all at once?
-// just users and auth status, then upon entering app, load remaining data?
-
 root.render(
   <Provider store={store}>
     <BrowserRouter>

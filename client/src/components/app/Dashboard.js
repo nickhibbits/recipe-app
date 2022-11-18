@@ -21,8 +21,9 @@ function Dashboard({ recipeCategories }) {
   );
 }
 
-const mapStateToProps = ({ recipeCategories }) => {
+const mapStateToProps = ({ users, recipeCategories }) => {
   return {
+    users,
     recipeCategories,
   };
 };
