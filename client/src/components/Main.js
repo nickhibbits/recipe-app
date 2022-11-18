@@ -7,7 +7,6 @@ import App from "./app/App";
 import "../styles/App.scss";
 
 function Main(props) {
-  // if (props.auth.loggedIn === true) {
   return (
     <div className="Main">
       <Routes>
@@ -16,7 +15,6 @@ function Main(props) {
       </Routes>
     </div>
   );
-  // }
 }
 
 const mapStateToProps = ({ auth, users }) => {

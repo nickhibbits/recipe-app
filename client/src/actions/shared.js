@@ -22,11 +22,13 @@ export function handleGetInitialData() {
   };
 }
 
-export function handleInitialLogin() {
+export function handleInitialLogin(loggedIn) {
   return async (dispatch) => {
     await getUsers().then((users) => {
       dispatch(receiveUsers(users));
-      dispatch(setAuth({ user: "Me 🟣", loggedIn: false }));
+      if (!loggedIn) {
+        dispatch(setAuth({ user: "", loggedIn: false }));
+      }
     });
   };
 }

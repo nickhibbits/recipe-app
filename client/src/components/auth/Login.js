@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { setAuth } from "../../actions/auth";
 
 import "../../styles/AuthForms.scss";
@@ -11,7 +11,7 @@ function Login(props) {
   const usernameInput = useRef();
   const passwordInput = useRef();
 
-  console.log("login 🟢");
+  // console.log("login 🟢");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,8 +29,7 @@ function Login(props) {
 
     if (props.users.byId[username].password === password) {
       console.log("Password Match 👍");
-      props.dispatch(setAuth(username));
-      props.setAuth("loggedIn");
+      props.dispatch(setAuth({ user: username, loggedIn: true }));
     }
   };
 
@@ -65,12 +64,11 @@ function Login(props) {
               className="button submit-button"
               value="Submit"
             />
-            <Link to={"/create-new-user"}>
+            <Link to={"/auth/create-user"}>
               <input
                 type="submit"
                 className="button create-account-button"
                 value="Create"
-                onClick={() => props.setAuth("createUser")}
               />
             </Link>
           </div>

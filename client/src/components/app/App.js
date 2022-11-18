@@ -14,17 +14,16 @@ import { handleInitialLogin } from "../../actions/shared";
 
 function App(props) {
   const [loading, setLoading] = useState(true);
-  console.log("loading", loading);
-
   const { dispatch, auth } = props;
   const { loggedIn } = auth;
 
   useEffect(() => {
-    dispatch(handleInitialLogin());
+    dispatch(handleInitialLogin(loggedIn));
   }, [dispatch]);
 
   useEffect(() => {
     loggedIn === false && setLoading(false);
+    loggedIn === true && setLoading(false);
   }, [loggedIn]);
 
   if (loading) {
@@ -36,18 +35,20 @@ function App(props) {
     return <Navigate to={`/auth`} />;
   }
 
-  return (
-    <div className="App">
-      <Nav />
-      <Routes>
-        <Route path="/" exact element={<Dashboard />} />
-        <Route path="/recipeProfile/:id" element={<RecipeProfile />} />
-        <Route path="userProfile/:userId" element={<UserProfile />} />
-        <Route path="recipeCharts" element={<RecipeCharts />} />
-        <Route path="myRecipes" element={<MyRecipes />} />
-      </Routes>
-    </div>
-  );
+  if (loggedIn) {
+    return (
+      <div className="App">
+        <Nav />
+        <Routes>
+          <Route path="/" exact element={<Dashboard />} />
+          <Route path="/recipeProfile/:id" element={<RecipeProfile />} />
+          <Route path="userProfile/:userId" element={<UserProfile />} />
+          <Route path="recipeCharts" element={<RecipeCharts />} />
+          <Route path="myRecipes" element={<MyRecipes />} />
+        </Routes>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = ({ auth }) => {

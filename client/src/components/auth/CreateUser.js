@@ -2,6 +2,7 @@ import React from "react";
 
 import { useRef, useState } from "react";
 import { connect } from "react-redux";
+import { createUser } from "../../actions/users";
 
 import "../../styles/AuthForms.scss";
 
@@ -15,6 +16,7 @@ function CreateUser(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    props.dispatch(createUser({ username: username, password: password }));
     console.log("Create user in database and update store");
   };
 

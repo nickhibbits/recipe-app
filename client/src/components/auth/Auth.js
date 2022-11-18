@@ -1,22 +1,22 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { connect } from "react-redux";
-import { Route, Routes, useLocation } from "react-router-dom";
-import { handleInitialLogin } from "../../actions/shared";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { handleGetUsers, handleInitialLogin } from "../../actions/shared";
 
 import CreateUser from "./CreateUser";
 import Login from "./Login";
 
 function Auth(props) {
   const { dispatch, auth } = props;
-  // const { loginStatus, setLoginStatus } = useState(auth.loggedIn);
-  const [loginStatus, setLoginStatus] = useState(false);
-  let { pathname } = useLocation();
+  const { loggedIn } = auth;
 
-  console.log("loginStatus", loginStatus);
+  useEffect(() => {
+    dispatch(handleGetUsers());
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(handleInitialLogin());
-  // }, [dispatch]);
+  if (loggedIn) {
+    return <Navigate to={`/`} />;
+  }
 
   return (
     <div className="auth-component">
@@ -28,4 +28,11 @@ function Auth(props) {
   );
 }
 
-export default connect()(Auth);
+const mapStateToProps = ({ users, auth }) => {
+  return {
+    auth,
+    users,
+  };
+};
+
+export default connect(mapStateToProps)(Auth);
