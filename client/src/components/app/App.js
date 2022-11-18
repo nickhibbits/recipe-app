@@ -14,12 +14,14 @@ import { handleInitialLogin } from "../../actions/shared";
 
 function App(props) {
   const [loading, setLoading] = useState(true);
+
+  console.log("props", props);
   const { dispatch, auth } = props;
   const { loggedIn } = auth;
 
   useEffect(() => {
     dispatch(handleInitialLogin(loggedIn));
-  }, [dispatch]);
+  }, [dispatch, loggedIn]);
 
   useEffect(() => {
     loggedIn === false && setLoading(false);

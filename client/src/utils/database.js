@@ -42,3 +42,17 @@ export function getUsers() {
     }, 1000);
   });
 }
+
+export function addUserToDb(newUser) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      db.users.byId[newUser.username] = {
+        username: newUser.username,
+        password: newUser.password,
+        savedRecipes: [],
+      };
+      db.users.allIds.push(newUser.username);
+      resolve(db.users);
+    }, 1000);
+  });
+}

@@ -1,18 +1,12 @@
-import { useEffect } from "react";
 import { connect } from "react-redux";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { handleGetUsers, handleInitialLogin } from "../../actions/shared";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import CreateUser from "./CreateUser";
 import Login from "./Login";
 
 function Auth(props) {
-  const { dispatch, auth } = props;
+  const { auth } = props;
   const { loggedIn } = auth;
-
-  useEffect(() => {
-    dispatch(handleGetUsers());
-  }, [dispatch]);
 
   if (loggedIn) {
     return <Navigate to={`/`} />;

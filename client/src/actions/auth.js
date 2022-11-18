@@ -6,7 +6,7 @@ export function setAuth({ user, loggedIn }) {
 
   return {
     type: SET_AUTH,
-    user: user,
-    loggedIn: loggedIn,
+    user,
+    loggedIn,
   };
 }

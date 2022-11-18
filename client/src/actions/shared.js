@@ -23,6 +23,7 @@ export function handleGetInitialData() {
 }
 
 export function handleInitialLogin(loggedIn) {
+  console.log("handleInitialLogin 🟢");
   return async (dispatch) => {
     await getUsers().then((users) => {
       dispatch(receiveUsers(users));

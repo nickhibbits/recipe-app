@@ -2,7 +2,8 @@ import React from "react";
 
 import { useRef, useState } from "react";
 import { connect } from "react-redux";
-import { createUser } from "../../actions/users";
+import { useNavigate } from "react-router-dom";
+import { createUser, handleCreateUser } from "../../actions/users";
 
 import "../../styles/AuthForms.scss";
 
@@ -11,13 +12,18 @@ function CreateUser(props) {
   const [password, setPassword] = useState();
   const usernameInput = useRef();
   const passwordInput = useRef();
+  const navigate = useNavigate();
 
   console.log("create-user 🔻");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.dispatch(createUser({ username: username, password: password }));
-    console.log("Create user in database and update store");
+    const newUser = {
+      username,
+      password,
+    };
+    props.dispatch(handleCreateUser(newUser));
+    return navigate("/");
   };
 
   return (

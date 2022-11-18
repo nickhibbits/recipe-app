@@ -10,9 +10,9 @@ import "./styles/index.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-// TODO
-// 1. React Router refacotor:
-// Distinguish protected App routes from /login and /create-user urls to yeild usual browser behavior -- rather than relying component state changes
+// Documentation Notes
+// Login Flow
+// React-Router usage
 
 // 2. Redux auth flow
 // Decide how to best initialize redux store from login screen to entering app
