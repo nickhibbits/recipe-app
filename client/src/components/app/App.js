@@ -1,6 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
+import { handleInitialLogin } from "../../actions/shared";
+import { useLoadingCheck } from "../../utils/customHooks";
 
 import Dashboard from "./Dashboard";
 import MyRecipes from "./MyRecipes";
@@ -10,23 +12,16 @@ import RecipeCharts from "./RecipeCharts";
 import UserProfile from "./UserProfile";
 
 import "../../styles/App.scss";
-import { handleInitialLogin } from "../../actions/shared";
 
 function App(props) {
-  const [loading, setLoading] = useState(true);
-
-  console.log("props", props);
   const { dispatch, auth } = props;
   const { loggedIn } = auth;
+
+  const loading = useLoadingCheck(loggedIn);
 
   useEffect(() => {
     dispatch(handleInitialLogin(loggedIn));
   }, [dispatch, loggedIn]);
-
-  useEffect(() => {
-    loggedIn === false && setLoading(false);
-    loggedIn === true && setLoading(false);
-  }, [loggedIn]);
 
   if (loading) {
     return <div className="loading">Loading...</div>;
