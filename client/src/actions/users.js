@@ -1,7 +1,8 @@
-import { addUserToDb } from "../utils/database";
+import { addRecipeToUserProfile, addUserToDb } from "../utils/database";
 
 export const RECEIVE_USERS = "RECEIVE_USERS";
 export const CREATE_USER = "CREATE_USER";
+export const SAVE_RECIPE = "SAVE_RECIPE";
 
 export function receiveUsers(users) {
   return {
@@ -31,5 +32,23 @@ function createUser(newUser) {
     type: CREATE_USER,
     username,
     password,
+  };
+}
+
+export function handleSaveRecipe(username, recipeId) {
+  return async (dispatch) => {
+    console.log("here");
+    await addRecipeToUserProfile(username, recipeId).then((res) => {
+      console.log("saveRecipe response", res);
+      dispatch(saveRecipe(username, recipeId));
+    });
+  };
+}
+
+function saveRecipe(username, recipeId) {
+  return {
+    type: SAVE_RECIPE,
+    username,
+    recipeId,
   };
 }

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { connect } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { setAuth } from "../../actions/auth";
 
 import "../../styles/AuthForms.scss";

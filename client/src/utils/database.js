@@ -10,7 +10,7 @@ const db = {
       nickhibbits: {
         username: "nickhibbits",
         password: "password1",
-        savedRecipes: ["recipe1", "recipe2"],
+        savedRecipes: [],
       },
     },
     allIds: ["nickhibbits"],
@@ -53,6 +53,21 @@ export function addUserToDb(newUser) {
       };
       db.users.allIds.push(newUser.username);
       resolve(db.users);
+    }, 1000);
+  });
+}
+
+export function addRecipeToUserProfile(username, newRecipeId) {
+  console.log("username", username);
+  console.log("newRecipeId", newRecipeId);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      db.users.byId[username].savedRecipes = [
+        ...db.users.byId[username].savedRecipes,
+        newRecipeId,
+      ];
+      console.log("updated user", db.users.byId[username]);
+      resolve(db.users.byId[username]);
     }, 1000);
   });
 }

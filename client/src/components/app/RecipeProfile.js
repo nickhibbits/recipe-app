@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 
 import { connect } from "react-redux";
-import { handleReceiveRecipe, handleSaveRecipe } from "../../actions/recipe";
+import { handleReceiveRecipe } from "../../actions/recipe";
+import { handleSaveRecipe } from "../../actions/users";
 import { Interweave } from "interweave";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 
@@ -20,7 +21,7 @@ const withRouter = (Component) => {
 
 function RecipeProfile(props) {
   const { id } = props.router.params;
-  const { dispatch } = props;
+  const { dispatch, currentUser } = props;
   const { title, instructions, image, summary } = props.recipe;
 
   useEffect(() => {
@@ -40,7 +41,10 @@ function RecipeProfile(props) {
         <img src={image} alt="recipe" className="recipe-image" />
       </section>
       <section className="button-wrapper">
-        <button className="button" onClick={() => handleSaveRecipe()}>
+        <button
+          className="button"
+          onClick={() => dispatch(handleSaveRecipe(currentUser, id.slice(1)))}
+        >
           Save
         </button>
         <Link to={"/"}>
@@ -51,9 +55,9 @@ function RecipeProfile(props) {
   );
 }
 
-const mapStateToProps = ({ recipeCategories, user, recipe }) => {
+const mapStateToProps = ({ auth, recipe }) => {
   return {
-    recipeCategories,
+    currentUser: auth.user,
     recipe,
   };
 };

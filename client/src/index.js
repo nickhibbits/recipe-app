@@ -11,7 +11,7 @@ import "./styles/index.scss";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // Documentation Notes
-// Login Flow
+// 1. Login Flow
 // React-Router usage
 
 root.render(
