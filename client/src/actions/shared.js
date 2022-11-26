@@ -13,9 +13,9 @@ export function handleGetUsers() {
   };
 }
 
-export function handleGetRecipeCategories() {
+export function handleGetRecipeCategories(categoryIds) {
   return async (dispatch) => {
-    await getRecipeCategories().then((recipeCategories) => {
+    await getRecipeCategories(categoryIds).then((recipeCategories) => {
       console.log("recipeCategories", recipeCategories);
       dispatch(receiveRecipeCategories(recipeCategories));
     });

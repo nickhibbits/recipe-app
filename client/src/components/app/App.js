@@ -26,6 +26,7 @@ function App({ dispatch, auth, users }) {
 
     if (loggedIn === true) {
       const userRecipeCategories = users.byId[user].savedRecipeCategories;
+      console.log("userRecipeCategories", userRecipeCategories);
       dispatch(handleGetRecipeCategories(userRecipeCategories));
     }
   }, [dispatch, users, user, loggedIn]);

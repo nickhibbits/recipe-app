@@ -17,6 +17,7 @@ async function fetchRecipeCategory(cuisine, resultCount) {
   return await fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      console.log("data", data);
       const recipeCategory = {
         cuisine,
         recipes: data.results,
@@ -36,12 +37,17 @@ async function fetchRecipeInfo(id) {
   return getIngredients;
 }
 
-app.post("/getRecipeCategories", async (req, res) => {
+app.post("/getRecipeCategories", jsonParser, async (req, res) => {
   // pass user selected recipe categories
-  console.log("recipeCategoryIds", req.body);
-  const userRecipeCategories = req.body;
+  const userRecipeCategoryIds = req.body.recipeCategoryIds;
+  console.log("userRecipeCategoryIds", userRecipeCategoryIds);
 
-  Promise.all(userRecipeCategories).then((values) => {
+  const categoryPromises = userRecipeCategoryIds.map(async (category) => {
+    return await fetchRecipeCategory(category, 8);
+  });
+
+  Promise.all(categoryPromises).then((values) => {
+    console.log("values", values);
     res.send(values);
   });
 });
