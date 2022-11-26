@@ -1,4 +1,9 @@
-import { RECEIVE_USERS, CREATE_USER, SAVE_RECIPE } from "../actions/users";
+import {
+  RECEIVE_USERS,
+  CREATE_USER,
+  SAVE_RECIPE,
+  UPDATE_USER,
+} from "../actions/users";
 
 export function users(state = {}, action) {
   switch (action.type) {
@@ -14,9 +19,18 @@ export function users(state = {}, action) {
           [action.username]: {
             username: action.username,
             password: action.password,
+            newUser: true,
           },
         },
         allIds: [...state.allIds, action.username],
+      };
+    case UPDATE_USER:
+      return {
+        byId: {
+          ...state.byId,
+          [action.username]: action.updatedUser,
+        },
+        allIds: [...state.allIds],
       };
     case SAVE_RECIPE:
       const { username } = action;

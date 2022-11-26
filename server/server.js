@@ -17,13 +17,14 @@ async function fetchRecipeCategory(cuisine, resultCount) {
   return await fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log("data", data);
+      // console.log("data", data);
       const recipeCategory = {
         cuisine,
         recipes: data.results,
       };
       return recipeCategory;
-    });
+    })
+    .catch((err) => console.log("ERROR 🛑", err));
 }
 
 async function fetchRecipeInfo(id) {

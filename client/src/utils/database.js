@@ -58,6 +58,16 @@ export function addUserToDb(newUser) {
   });
 }
 
+export function updateUserOnDb(updatedUser) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // need a different way to find the user in even they change their username
+      db.users.byId[updatedUser.username] = updatedUser;
+      resolve(db.users.byId[updatedUser.username]);
+    }, 1000);
+  });
+}
+
 export function addRecipeToUserProfile(username, newRecipeId) {
   console.log("username", username);
   console.log("newRecipeId", newRecipeId);
