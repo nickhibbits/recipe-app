@@ -1,5 +1,13 @@
-export async function getRecipeCategories() {
-  const data = await fetch("./getRecipeCategories")
+export async function getRecipeCategories(recipeCategoryIds) {
+  const data = await fetch("./getRecipeCategories", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      recipeCategoryIds,
+    }),
+  })
     .then((response) => response.json())
     .then((recipeCategories) => {
       console.log("recipeCategories", recipeCategories);

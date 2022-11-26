@@ -36,12 +36,12 @@ async function fetchRecipeInfo(id) {
   return getIngredients;
 }
 
-app.get("/getRecipeCategories", async (req, res) => {
-  const americanRecipes = fetchRecipeCategory("American", 8);
-  const thaiRecipes = fetchRecipeCategory("Thai", 8);
-  const africanRecipes = fetchRecipeCategory("African", 8);
+app.post("/getRecipeCategories", async (req, res) => {
+  // pass user selected recipe categories
+  console.log("recipeCategoryIds", req.body);
+  const userRecipeCategories = req.body;
 
-  Promise.all([americanRecipes, thaiRecipes, africanRecipes]).then((values) => {
+  Promise.all(userRecipeCategories).then((values) => {
     res.send(values);
   });
 });

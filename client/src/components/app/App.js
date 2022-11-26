@@ -16,9 +16,8 @@ import UserProfile from "./UserProfile";
 
 import "../../styles/App.scss";
 
-function App(props) {
-  const { dispatch, auth } = props;
-  const { loggedIn } = auth;
+function App({ dispatch, auth, users }) {
+  const { loggedIn, user } = auth;
 
   const loading = useLoadingCheck(loggedIn);
 
@@ -26,9 +25,10 @@ function App(props) {
     dispatch(handleInitialLogin(loggedIn));
 
     if (loggedIn === true) {
-      dispatch(handleGetRecipeCategories());
+      const userRecipeCategories = users.byId[user].savedRecipeCategories;
+      dispatch(handleGetRecipeCategories(userRecipeCategories));
     }
-  }, [dispatch, loggedIn]);
+  }, [dispatch, users, user, loggedIn]);
 
   if (loading) {
     return <div className="loading">Loading...</div>;
@@ -55,9 +55,10 @@ function App(props) {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
+const mapStateToProps = ({ auth, users }) => {
   return {
     auth,
+    users,
   };
 };
 

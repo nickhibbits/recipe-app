@@ -19,7 +19,7 @@ export function users(state = {}, action) {
         allIds: [...state.allIds, action.username],
       };
     case SAVE_RECIPE:
-      const { username, recipeId } = action;
+      const { username } = action;
 
       return {
         byId: {
