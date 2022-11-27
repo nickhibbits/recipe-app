@@ -51,7 +51,8 @@ export function addUserToDb(newUser) {
       db.users.byId[newUser.username] = {
         username: newUser.username,
         password: newUser.password,
-        savedRecipes: [],
+        savedRecipeCategories: [],
+        newUser: true,
       };
       db.users.allIds.push(newUser.username);
       resolve(db.users);

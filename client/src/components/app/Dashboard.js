@@ -6,22 +6,23 @@ import RecipeScrollContainer from "./RecipeScrollContainer";
 function Dashboard({ recipeCategories, username, users }) {
   const categoryTitles = Object.keys(recipeCategories);
 
+  if (users[username].newUser === true) {
+    return <NewUserCuisineSelect />;
+  }
+
   return (
     <main className="dashboard-component component">
       <h1 className="page-heading">Dashboard</h1>
-      {users[username].newUser === true ? (
-        <NewUserCuisineSelect />
-      ) : (
-        Object.values(recipeCategories).map((category, i) => {
-          return (
-            <RecipeScrollContainer
-              recipes={category}
-              categoryTitle={categoryTitles[i]}
-              key={i}
-            />
-          );
-        })
-      )}
+
+      {Object.values(recipeCategories).map((category, i) => {
+        return (
+          <RecipeScrollContainer
+            recipes={category}
+            categoryTitle={categoryTitles[i]}
+            key={i}
+          />
+        );
+      })}
     </main>
   );
 }
