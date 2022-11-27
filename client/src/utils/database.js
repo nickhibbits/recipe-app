@@ -12,6 +12,7 @@ const db = {
         password: "password1",
         savedRecipes: [],
         savedRecipeCategories: ["American", "Thai", "African"],
+        newUser: false,
       },
     },
     allIds: ["nickhibbits"],

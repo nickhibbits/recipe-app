@@ -28,7 +28,7 @@ function Dashboard({ recipeCategories, username, users }) {
 
 const mapStateToProps = ({ auth, users, recipeCategories }) => {
   return {
-    username: auth.username,
+    username: auth.user,
     users: users.byId,
     recipeCategories,
   };
