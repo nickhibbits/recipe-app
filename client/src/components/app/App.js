@@ -24,7 +24,7 @@ function App({ dispatch, auth, users }) {
   useEffect(() => {
     dispatch(handleInitialLogin(loggedIn));
 
-    if (loggedIn === true) {
+    if (loggedIn === true && users.byId[user].newUser === false) {
       const userRecipeCategories = users.byId[user].savedRecipeCategories;
       dispatch(handleGetRecipeCategories(userRecipeCategories));
     }

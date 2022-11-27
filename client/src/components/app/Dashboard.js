@@ -7,6 +7,7 @@ function Dashboard({ recipeCategories, username, users }) {
   const categoryTitles = Object.keys(recipeCategories);
 
   if (users[username].newUser === true) {
+    console.log("newUser beatch");
     return <NewUserCuisineSelect />;
   }
 
