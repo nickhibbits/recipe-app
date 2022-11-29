@@ -6,7 +6,7 @@ import App from "./app/App";
 
 import "../styles/App.scss";
 
-function Main(props) {
+function Main() {
   return (
     <div className="Main">
       <Routes>

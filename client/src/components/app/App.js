@@ -3,8 +3,9 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import {
   handleGetRecipeCategories,
-  handleInitialLogin,
+  handleGetUsers,
 } from "../../actions/shared";
+import { setAuth } from "../../actions/auth";
 import { useLoadingCheck } from "../../utils/customHooks";
 
 import Dashboard from "./Dashboard";
@@ -22,21 +23,30 @@ function App({ dispatch, auth, users }) {
   const loading = useLoadingCheck(loggedIn);
 
   useEffect(() => {
-    dispatch(handleInitialLogin(loggedIn));
+    console.log("setAuth 🟢");
+    if (!loggedIn) {
+      dispatch(setAuth({ user, loggedIn }));
+    }
+  }, [dispatch, user, loggedIn]);
 
+  useEffect(() => {
+    dispatch(handleGetUsers());
+  }, [dispatch]);
+
+  useEffect(() => {
     if (loggedIn === true && users.byId[user].newUser === false) {
       const userRecipeCategories = users.byId[user].savedRecipeCategories;
       dispatch(handleGetRecipeCategories(userRecipeCategories));
     }
-  }, []);
+  }, [users, loggedIn, user, dispatch]);
 
   if (loading) {
     return <div className="loading">Loading...</div>;
   }
 
-  if (loggedIn === false) {
-    console.log("no user ❌");
-    return <Navigate to={`/auth`} />;
+  if (!loggedIn) {
+    console.log("to auth");
+    <Navigate to={`/auth`} />;
   }
 
   if (loggedIn) {

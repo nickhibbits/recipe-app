@@ -1,6 +1,6 @@
 import {
   addRecipeToUserProfile,
-  addUserToDb,
+  getUsers,
   updateUserOnDb,
 } from "../utils/database";
 
@@ -9,10 +9,11 @@ export const CREATE_USER = "CREATE_USER";
 export const SAVE_RECIPE = "SAVE_RECIPE";
 export const UPDATE_USER = "UPDATE_USER";
 
-export function receiveUsers(users) {
-  return {
-    type: RECEIVE_USERS,
-    users,
+export function handleReceiveUsers() {
+  return async (dispatch) => {
+    await getUsers().then((users) => {
+      dispatch(receiveUsers(users));
+    });
   };
 }
 
@@ -21,21 +22,6 @@ export function handleUpdateUser(updatedUser) {
     await updateUserOnDb(updatedUser).then((user) => {
       console.log("user updated", user);
       dispatch(updateUser(updateUser));
-    });
-  };
-}
-
-export function handleCreateUser(newUser) {
-  return async (dispatch) => {
-    // TODO implement optimisic updates for better UX
-    // FIRST update store, then update the db
-    // in case of error on db, delete newly created user from store and notify client with alert
-    // need deleteUser action creator
-
-    await addUserToDb(newUser).then((users) => {
-      console.log("new user added");
-      console.log("updated users object", users);
-      dispatch(createUser(newUser));
     });
   };
 }
@@ -50,13 +36,20 @@ export function handleSaveRecipe(username, recipeId) {
   };
 }
 
-function createUser(newUser) {
+export function receiveUsers(users) {
+  return {
+    type: RECEIVE_USERS,
+    users,
+  };
+}
+
+export function createUser(newUser) {
   const { username, password } = newUser;
   return {
     type: CREATE_USER,
     username,
     password,
-    // newUser: true,
+    newUser: true,
   };
 }
 

@@ -1,15 +1,10 @@
 // import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import NewUserCuisineSelect from "./NewUserCuisineSelect";
+
 import RecipeScrollContainer from "./RecipeScrollContainer";
 
-function Dashboard({ recipeCategories, username, users }) {
+function Dashboard({ username, users, recipeCategories }) {
   const categoryTitles = Object.keys(recipeCategories);
-
-  if (users[username].newUser === true) {
-    console.log("newUser beatch");
-    return <NewUserCuisineSelect />;
-  }
 
   return (
     <main className="dashboard-component component">

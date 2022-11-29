@@ -3,7 +3,7 @@ import React from "react";
 import { useRef, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createUser, handleCreateUser } from "../../actions/users";
+import { handleCreateUser } from "../../actions/shared";
 
 import "../../styles/AuthForms.scss";
 
