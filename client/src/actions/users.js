@@ -1,13 +1,15 @@
 import {
   addRecipeToUserProfile,
   getUsers,
-  updateUserOnDb,
+  updateNewUserStatusOnDb,
+  updateUserCuisinesOnDb,
 } from "../utils/database";
 
 export const RECEIVE_USERS = "RECEIVE_USERS";
 export const CREATE_USER = "CREATE_USER";
 export const SAVE_RECIPE = "SAVE_RECIPE";
-export const UPDATE_USER = "UPDATE_USER";
+export const UPDATE_USER_CUISINES = "UPDATE_USER_CUISINES";
+export const UPDATE_NEW_USER_STATUS = "UPDATE_NEW_USER_STATUS";
 
 export function handleReceiveUsers() {
   return async (dispatch) => {
@@ -17,21 +19,33 @@ export function handleReceiveUsers() {
   };
 }
 
-export function handleUpdateUser(updatedUser) {
+export function handleUpdateUserCuisines(user, updatedCuisines) {
   return async (dispatch) => {
-    await updateUserOnDb(updatedUser).then((user) => {
-      console.log("user updated", user);
-      dispatch(updateUser(updateUser));
-    });
+    console.log("handleUpdateUserCuisines", { user, updatedCuisines });
+    await updateUserCuisinesOnDb(user, updatedCuisines)
+      .then((_user) => {
+        console.log("userCuisines updated", _user);
+        dispatch(updateUserCuisines(_user.username, _user.savedCuisines));
+      })
+      .catch((e) => console.log("ERROR", e));
   };
 }
 
 export function handleSaveRecipe(username, recipeId) {
   return async (dispatch) => {
-    console.log("here");
     await addRecipeToUserProfile(username, recipeId).then((res) => {
       console.log("saveRecipe response", res);
       dispatch(saveRecipe(username, recipeId));
+    });
+  };
+}
+
+export function handleUpdateNewUserStatus(username) {
+  return async (dispatch) => {
+    await updateNewUserStatusOnDb(username).then((updatedUser) => {
+      console.log("updatedUser", updatedUser);
+      const newUserStatus = updatedUser.newUser;
+      dispatch(updateNewUserStatus(username, newUserStatus));
     });
   };
 }
@@ -53,10 +67,19 @@ export function createUser(newUser) {
   };
 }
 
-function updateUser(updatedUser) {
+function updateUserCuisines(username, updatedCuisines) {
   return {
-    type: UPDATE_USER,
-    updatedUser,
+    type: UPDATE_USER_CUISINES,
+    username,
+    updatedCuisines,
+  };
+}
+
+function updateNewUserStatus(username, newUserStatus) {
+  return {
+    type: UPDATE_NEW_USER_STATUS,
+    username,
+    newUserStatus,
   };
 }
 

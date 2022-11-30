@@ -2,7 +2,8 @@ import {
   RECEIVE_USERS,
   CREATE_USER,
   SAVE_RECIPE,
-  UPDATE_USER,
+  UPDATE_USER_CUISINES,
+  UPDATE_NEW_USER_STATUS,
 } from "../actions/users";
 
 export function users(state = {}, action) {
@@ -24,13 +25,26 @@ export function users(state = {}, action) {
         },
         allIds: [...state.allIds, action.username],
       };
-    case UPDATE_USER:
+    case UPDATE_USER_CUISINES:
       return {
         byId: {
           ...state.byId,
-          [action.username]: action.updatedUser,
+          [action.username]: {
+            ...state.byId[action.username],
+            savedRecipeCategories: action.updatedCuisines,
+          },
         },
         allIds: [...state.allIds],
+      };
+    case UPDATE_NEW_USER_STATUS:
+      return {
+        byId: {
+          ...state.byId,
+          [action.username]: {
+            ...state.byId[action.username],
+            newUser: action.newUserStatus,
+          },
+        },
       };
     case SAVE_RECIPE:
       const { username } = action;

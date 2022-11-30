@@ -13,7 +13,11 @@ function Main() {
       <Routes>
         <Route path="/*" element={<App />} />
         <Route path="/auth/*" exact element={<Auth />} />
-        <Route path={`/new-user-cuisines`} element={<NewUserCuisines />} />
+        <Route
+          path={`/new-user-cuisines`}
+          exact
+          element={<NewUserCuisines />}
+        />
       </Routes>
     </div>
   );

@@ -53,6 +53,7 @@ function App({ dispatch, auth, users }) {
       console.log("to cuisine selects ⭐️");
       return <Navigate to={`/new-user-cuisines`} />;
     }
+
     return (
       <div className="App">
         <Nav />

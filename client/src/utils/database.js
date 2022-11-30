@@ -60,14 +60,21 @@ export function addUserToDb(newUser) {
   });
 }
 
-export function updateUserOnDb(updatedUser) {
-  return new Promise((resolve) => {
+export function updateUserCuisinesOnDb(username, updatedUserCuisines) {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       // need a different way to find the user in even they change their username
-      db.users.byId[updatedUser.username] = updatedUser;
-      resolve(db.users.byId[updatedUser.username]);
+      db.users.byId[username].savedRecipeCategories = updatedUserCuisines;
+      resolve(db.users.byId[username].savedRecipeCategories);
     }, 1000);
-  });
+  })
+    .then((data) => {
+      return data;
+    })
+    .catch((error) => {
+      console.log("ERROR", error);
+      return error;
+    });
 }
 
 export function addRecipeToUserProfile(username, newRecipeId) {
@@ -81,6 +88,18 @@ export function addRecipeToUserProfile(username, newRecipeId) {
       ];
       console.log("updated user", db.users.byId[username]);
       resolve(db.users.byId[username]);
+    }, 1000);
+  });
+}
+
+export function updateNewUserStatusOnDb(username) {
+  const users = db.users.byId;
+  console.log("user", users[username]);
+  console.log("username", username);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      users[username].newUser = !users[username].newUser;
+      resolve(users[username]);
     }, 1000);
   });
 }
