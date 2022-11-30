@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import Auth from "./auth/Auth";
 import App from "./app/App";
+import NewUserCuisines from "./auth/NewUserCuisines";
 
 import "../styles/App.scss";
 
@@ -12,6 +13,7 @@ function Main() {
       <Routes>
         <Route path="/*" element={<App />} />
         <Route path="/auth/*" exact element={<Auth />} />
+        <Route path={`/new-user-cuisines`} element={<NewUserCuisines />} />
       </Routes>
     </div>
   );

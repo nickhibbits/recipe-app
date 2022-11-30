@@ -44,12 +44,15 @@ function App({ dispatch, auth, users }) {
     return <div className="loading">Loading...</div>;
   }
 
-  if (!loggedIn) {
-    console.log("to auth");
-    <Navigate to={`/auth`} />;
+  if (loggedIn === false) {
+    return <Navigate to={`/auth`} />;
   }
 
   if (loggedIn) {
+    if (users.byId[user].newUser) {
+      console.log("to cuisine selects ⭐️");
+      return <Navigate to={`/new-user-cuisines`} />;
+    }
     return (
       <div className="App">
         <Nav />
