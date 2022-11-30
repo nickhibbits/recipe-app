@@ -23,7 +23,6 @@ function App({ dispatch, auth, users }) {
   const loading = useLoadingCheck(loggedIn);
 
   useEffect(() => {
-    console.log("setAuth 🟢");
     if (!loggedIn) {
       dispatch(setAuth({ user, loggedIn }));
     }
@@ -50,7 +49,6 @@ function App({ dispatch, auth, users }) {
 
   if (loggedIn) {
     if (users.byId[user].newUser) {
-      console.log("to cuisine selects ⭐️");
       return <Navigate to={`/new-user-cuisines`} />;
     }
 

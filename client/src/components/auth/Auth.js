@@ -7,7 +7,6 @@ import Login from "./Login";
 function Auth(props) {
   const { auth } = props;
   const { loggedIn } = auth;
-  console.log("loggedIn", loggedIn);
 
   if (loggedIn) {
     return <Navigate to={`/`} />;

@@ -26,6 +26,8 @@ function NewUserCuisines({ dispatch, username, users }) {
     return <Navigate to="/" />;
   }
 
+  // TODO
+  // Check against existing categories for any updates to list
   const allCategories = [
     "African",
     "American",

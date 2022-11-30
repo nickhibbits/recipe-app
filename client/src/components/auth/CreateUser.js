@@ -14,8 +14,6 @@ function CreateUser(props) {
   const passwordInput = useRef();
   const navigate = useNavigate();
 
-  console.log("create-user 🔻");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const newUser = {

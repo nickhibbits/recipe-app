@@ -21,10 +21,8 @@ export function handleReceiveUsers() {
 
 export function handleUpdateUserCuisines(user, updatedCuisines) {
   return async (dispatch) => {
-    console.log("handleUpdateUserCuisines", { user, updatedCuisines });
     await updateUserCuisinesOnDb(user, updatedCuisines)
       .then((_user) => {
-        console.log("userCuisines updated", _user);
         dispatch(updateUserCuisines(_user.username, _user.savedCuisines));
       })
       .catch((e) => console.log("ERROR", e));
@@ -34,7 +32,6 @@ export function handleUpdateUserCuisines(user, updatedCuisines) {
 export function handleSaveRecipe(username, recipeId) {
   return async (dispatch) => {
     await addRecipeToUserProfile(username, recipeId).then((res) => {
-      console.log("saveRecipe response", res);
       dispatch(saveRecipe(username, recipeId));
     });
   };
@@ -43,7 +40,6 @@ export function handleSaveRecipe(username, recipeId) {
 export function handleUpdateNewUserStatus(username) {
   return async (dispatch) => {
     await updateNewUserStatusOnDb(username).then((updatedUser) => {
-      console.log("updatedUser", updatedUser);
       const newUserStatus = updatedUser.newUser;
       dispatch(updateNewUserStatus(username, newUserStatus));
     });

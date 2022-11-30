@@ -11,13 +11,8 @@ function Login(props) {
   const usernameInput = useRef();
   const passwordInput = useRef();
 
-  // console.log("login 🟢");
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("username", username);
-    console.log("password", password);
-    console.log("props.users", props.users);
 
     if (!props.users.allIds.find((user) => username === user)) {
       alert('❌ Username doesn\'t exist, click "Create" account to begin.');
@@ -28,7 +23,6 @@ function Login(props) {
     }
 
     if (props.users.byId[username].password === password) {
-      console.log("Password Match 👍");
       props.dispatch(setAuth({ user: username, loggedIn: true }));
     }
   };
