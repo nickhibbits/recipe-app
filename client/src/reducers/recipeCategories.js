@@ -5,12 +5,21 @@ export function recipeCategories(state = {}, action) {
     case RECEIVE_RECIPE_CATEGORIES:
       const recipeCategories = action.recipeCategories;
       console.log("recipes", recipeCategories);
+
+      let categoriesObject = {};
+
+      recipeCategories.forEach((category) => {
+        categoriesObject = {
+          ...categoriesObject,
+          [category.cuisine]: category.recipes,
+        };
+      });
+
+      console.log("categoriesObject", categoriesObject);
+
       return {
         ...state,
-
-        [recipeCategories[0].cuisine]: recipeCategories[0].recipes,
-        [recipeCategories[1].cuisine]: recipeCategories[1].recipes,
-        [recipeCategories[2].cuisine]: recipeCategories[2].recipes,
+        ...categoriesObject,
       };
 
     default:

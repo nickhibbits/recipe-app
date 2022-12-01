@@ -21,7 +21,7 @@ export function users(state = {}, action) {
             username: action.username,
             password: action.password,
             savedRecipes: [],
-            savedRecipeCategories: ["myCategories"],
+            savedRecipeCategories: [],
             newUser: true,
           },
         },

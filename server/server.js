@@ -21,6 +21,7 @@ async function fetchRecipeCategory(cuisine, resultCount) {
         cuisine,
         recipes: data.results,
       };
+      console.log("recipeCategory", recipeCategory);
       return recipeCategory;
     })
     .catch((err) => console.log("ERROR 🛑", err));
@@ -41,18 +42,27 @@ app.post("/getRecipeCategories", jsonParser, async (req, res) => {
   const userRecipeCategoryIds = req.body.recipeCategoryIds;
   console.log("userRecipeCategoryIds", userRecipeCategoryIds);
 
+  const categoryPromises = userRecipeCategoryIds.map(async (category) => {
+    return await fetchRecipeCategory(category, 8);
+  });
+
+  res.send(categoryPromises);
+});
+
+app.post("recipeProfile/getRecipeCategories", jsonParser, async (req, res) => {
+  // console.log("route check 🍔", "recipeProfile/getRecipeCategories" );
+  const userRecipeCategoryIds = req.body.recipeCategoryIds;
+  console.log("userRecipeCategoryIds", userRecipeCategoryIds);
+
   const categoryPromises = userRecipeCategoryIds.map((category) => {
     return fetchRecipeCategory(category, 8);
   });
 
-  Promise.all(categoryPromises).then((values) => {
-    console.log("values", values);
-    res.send(values);
-  });
+  res.send(categoryPromises);
 });
 
 app.post("/recipeProfile/getRecipe", jsonParser, async (req, res) => {
-  await fetchRecipeInfo(req.body.id.substring(1)).then((info) => {
+  await fetchRecipeInfo(req.body.id).then((info) => {
     // console.log("recipeInfo 🍔", info);
     res.send(info);
   });

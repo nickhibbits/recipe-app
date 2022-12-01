@@ -35,10 +35,21 @@ function App({ dispatch, auth, users }) {
   useEffect(() => {
     // TODO
     // consider cleanup function to mitigate error when saving individual recipes
-    if (loggedIn === true && users.byId[user].newUser === false) {
-      const userRecipeCategories = users.byId[user].savedRecipeCategories;
-      dispatch(handleGetRecipeCategories(userRecipeCategories));
+    let mounted = true;
+
+    if (mounted === true) {
+      console.log("mounted", mounted);
+      if (loggedIn === true && users.byId[user].newUser === false) {
+        const userRecipeCategories = users.byId[user].savedRecipeCategories;
+        const savedRecipes = users.byId[user].savedRecipes;
+        dispatch(handleGetRecipeCategories(userRecipeCategories, savedRecipes));
+      }
     }
+
+    return () => {
+      mounted = false;
+      console.log("mounted", mounted);
+    };
   }, [users, loggedIn, user, dispatch]);
 
   if (loading) {

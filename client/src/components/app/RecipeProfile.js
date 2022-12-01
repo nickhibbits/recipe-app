@@ -24,7 +24,7 @@ function RecipeProfile(props) {
   const { title, instructions, image, summary } = props.recipe;
 
   useEffect(() => {
-    dispatch(handleReceiveRecipe(id));
+    dispatch(handleReceiveRecipe(id.substring(1)));
   }, [id, dispatch]);
 
   return (

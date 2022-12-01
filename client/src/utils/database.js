@@ -54,7 +54,7 @@ export function addUserToDb(newUser) {
       db.users.byId[newUser.username] = {
         username: newUser.username,
         password: newUser.password,
-        savedRecipeCategories: ["myCategories"],
+        savedRecipeCategories: [],
         savedRecipes: [],
         newUser: true,
       };
@@ -69,7 +69,7 @@ export function updateUserCuisinesOnDb(username, updatedRecipeCategories) {
     setTimeout(() => {
       // need a different way to find the user in even they change their username
       db.users.byId[username].savedRecipeCategories = updatedRecipeCategories;
-      resolve(db.users.byId[username].savedRecipeCategories);
+      resolve(db.users.byId[username]);
     }, 1000);
   });
   // .then((data) => {

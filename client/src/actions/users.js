@@ -21,10 +21,14 @@ export function handleReceiveUsers() {
 }
 
 export function handleUpdateUserCuisines(user, updatedRecipeCategories) {
+  console.log("user, cats", { user, updatedRecipeCategories });
   return async (dispatch) => {
     await updateUserCuisinesOnDb(user, updatedRecipeCategories)
       .then((_user) => {
-        dispatch(updateUserCuisines(_user.username, _user.savedCuisines));
+        console.log("_user", _user);
+        dispatch(
+          updateUserCuisines(_user.username, _user.savedRecipeCategories)
+        );
       })
       .catch((e) => console.log("ERROR", e));
   };
@@ -80,11 +84,11 @@ function createUser(newUser) {
   };
 }
 
-function updateUserCuisines(username, updatedCuisines) {
+function updateUserCuisines(username, updatedRecipeCategories) {
   return {
     type: UPDATE_USER_RECIPE_CATEGORIES,
     username,
-    updatedCuisines,
+    updatedRecipeCategories,
   };
 }
 
