@@ -30,6 +30,7 @@ export function handleUpdateUserCuisines(user, updatedCuisines) {
 }
 
 export function handleSaveRecipe(username, recipeId) {
+  console.log("action", { username, recipeId });
   return async (dispatch) => {
     await addRecipeToUserProfile(username, recipeId).then((res) => {
       dispatch(saveRecipe(username, recipeId));

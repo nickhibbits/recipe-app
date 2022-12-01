@@ -55,6 +55,7 @@ export function addUserToDb(newUser) {
         username: newUser.username,
         password: newUser.password,
         savedRecipeCategories: [],
+        savedRecipes: [],
         newUser: true,
       };
       db.users.allIds.push(newUser.username);
@@ -81,6 +82,7 @@ export function updateUserCuisinesOnDb(username, updatedUserCuisines) {
 }
 
 export function addRecipeToUserProfile(username, newRecipeId) {
+  console.log("user", db.users.byId[username]);
   return new Promise((resolve) => {
     setTimeout(() => {
       db.users.byId[username].savedRecipes = [

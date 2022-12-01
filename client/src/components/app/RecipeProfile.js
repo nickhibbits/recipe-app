@@ -4,16 +4,15 @@ import { connect } from "react-redux";
 import { handleReceiveRecipe } from "../../actions/recipe";
 import { handleSaveRecipe } from "../../actions/users";
 import { Interweave } from "interweave";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import "../../styles/RecipeProfile.scss";
 
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {
-    let location = useLocation();
     let params = useParams();
-    let navigate = useNavigate();
-    return <Component {...props} router={{ location, navigate, params }} />;
+
+    return <Component {...props} router={{ params }} />;
   };
 
   return ComponentWithRouterProp;

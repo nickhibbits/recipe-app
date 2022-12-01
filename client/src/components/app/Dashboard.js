@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import RecipeScrollContainer from "./RecipeScrollContainer";
 
-function Dashboard({ username, users, recipeCategories }) {
+function Dashboard({ recipeCategories }) {
   const categoryTitles = Object.keys(recipeCategories);
 
   return (

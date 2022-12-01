@@ -33,6 +33,8 @@ function App({ dispatch, auth, users }) {
   }, [dispatch]);
 
   useEffect(() => {
+    // TODO
+    // consider cleanup function to mitigate error when saving individual recipes
     if (loggedIn === true && users.byId[user].newUser === false) {
       const userRecipeCategories = users.byId[user].savedRecipeCategories;
       dispatch(handleGetRecipeCategories(userRecipeCategories));

@@ -20,6 +20,8 @@ export function users(state = {}, action) {
           [action.username]: {
             username: action.username,
             password: action.password,
+            savedRecipes: [],
+            savedRecipeCategories: [],
             newUser: true,
           },
         },
@@ -45,6 +47,7 @@ export function users(state = {}, action) {
             newUser: action.newUserStatus,
           },
         },
+        allIds: [...state.allIds],
       };
     case SAVE_RECIPE:
       const { username } = action;
