@@ -1,5 +1,6 @@
 import {
   addRecipeToUserProfile,
+  addUserToDb,
   getUsers,
   updateNewUserStatusOnDb,
   updateUserCuisinesOnDb,
@@ -8,7 +9,7 @@ import {
 export const RECEIVE_USERS = "RECEIVE_USERS";
 export const CREATE_USER = "CREATE_USER";
 export const SAVE_RECIPE = "SAVE_RECIPE";
-export const UPDATE_USER_CUISINES = "UPDATE_USER_CUISINES";
+export const UPDATE_USER_RECIPE_CATEGORIES = "UPDATE_USER_RECIPE_CATEGORIES";
 export const UPDATE_NEW_USER_STATUS = "UPDATE_NEW_USER_STATUS";
 
 export function handleReceiveUsers() {
@@ -19,9 +20,9 @@ export function handleReceiveUsers() {
   };
 }
 
-export function handleUpdateUserCuisines(user, updatedCuisines) {
+export function handleUpdateUserCuisines(user, updatedRecipeCategories) {
   return async (dispatch) => {
-    await updateUserCuisinesOnDb(user, updatedCuisines)
+    await updateUserCuisinesOnDb(user, updatedRecipeCategories)
       .then((_user) => {
         dispatch(updateUserCuisines(_user.username, _user.savedCuisines));
       })
@@ -47,6 +48,21 @@ export function handleUpdateNewUserStatus(username) {
   };
 }
 
+export function handleCreateUser(newUser) {
+  return async (dispatch) => {
+    // TODO implement optimisic updates for better UX
+    // FIRST update store, then update the db
+    // in case of error on db, delete newly created user from store and notify client with alert
+    // need deleteUser action creator
+
+    await addUserToDb(newUser).then((users) => {
+      console.log("new user added");
+      console.log("updated users object", users);
+      dispatch(createUser(newUser));
+    });
+  };
+}
+
 export function receiveUsers(users) {
   return {
     type: RECEIVE_USERS,
@@ -54,7 +70,7 @@ export function receiveUsers(users) {
   };
 }
 
-export function createUser(newUser) {
+function createUser(newUser) {
   const { username, password } = newUser;
   return {
     type: CREATE_USER,
@@ -66,7 +82,7 @@ export function createUser(newUser) {
 
 function updateUserCuisines(username, updatedCuisines) {
   return {
-    type: UPDATE_USER_CUISINES,
+    type: UPDATE_USER_RECIPE_CATEGORIES,
     username,
     updatedCuisines,
   };

@@ -2,7 +2,7 @@ import {
   RECEIVE_USERS,
   CREATE_USER,
   SAVE_RECIPE,
-  UPDATE_USER_CUISINES,
+  UPDATE_USER_RECIPE_CATEGORIES,
   UPDATE_NEW_USER_STATUS,
 } from "../actions/users";
 
@@ -21,19 +21,19 @@ export function users(state = {}, action) {
             username: action.username,
             password: action.password,
             savedRecipes: [],
-            savedRecipeCategories: [],
+            savedRecipeCategories: ["myCategories"],
             newUser: true,
           },
         },
         allIds: [...state.allIds, action.username],
       };
-    case UPDATE_USER_CUISINES:
+    case UPDATE_USER_RECIPE_CATEGORIES:
       return {
         byId: {
           ...state.byId,
           [action.username]: {
             ...state.byId[action.username],
-            savedRecipeCategories: action.updatedCuisines,
+            savedRecipeCategories: action.updatedRecipeCategories,
           },
         },
         allIds: [...state.allIds],
