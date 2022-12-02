@@ -31,8 +31,8 @@ export function handleGetRecipeCategories(categoryIds, savedRecipes) {
     }
 
     if (
-      savedRecipes.length !== 0 &&
-      savedRecipes.length !== savedRecipes.length // TODO figure different way to prevent multiple calls if saved recipes haven't changed
+      savedRecipes.length !== 0
+      // && savedRecipes.length !== savedRecipes.length // TODO figure different way to prevent multiple calls if saved recipes haven't changed
     ) {
       const myRecipes = savedRecipes.map(async (recipeId, i) => {
         return await getRecipe(recipeId).then((recipe) => {
