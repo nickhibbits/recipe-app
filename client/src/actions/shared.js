@@ -13,21 +13,30 @@ export function handleGetUsers() {
 }
 
 export function handleGetRecipeCategories(categoryIds, savedRecipes) {
+  console.log("categoryIds", categoryIds);
+  console.log("savedRecipes", savedRecipes);
+
   return async (dispatch) => {
     const recipeCategories = await getRecipeCategories(categoryIds).then(
       (_recipeCategories) => {
-        console.log("_recipeCategories", _recipeCategories);
+        console.log("_recipeCategories 👏", _recipeCategories);
         return _recipeCategories;
       }
     );
+
+    console.log("recipeCategories", recipeCategories);
 
     if (savedRecipes.length === 0) {
       dispatch(receiveRecipeCategories(recipeCategories));
     }
 
-    if (savedRecipes.length !== 0) {
+    if (
+      savedRecipes.length !== 0 &&
+      savedRecipes.length !== savedRecipes.length // TODO figure different way to prevent multiple calls if saved recipes haven't changed
+    ) {
       const myRecipes = savedRecipes.map(async (recipeId, i) => {
-        await getRecipe(recipeId).then((recipe) => {
+        return await getRecipe(recipeId).then((recipe) => {
+          console.log("recipe", recipe);
           const { id, title, image, imageType } = recipe;
           const _recipe = {
             id,
@@ -39,14 +48,17 @@ export function handleGetRecipeCategories(categoryIds, savedRecipes) {
         });
       });
 
-      console.log("myRecipes", myRecipes);
+      Promise.all(myRecipes).then((recipes) => {
+        console.log("recipes", recipes);
 
-      const allRecipeCategories = [
-        ...recipeCategories,
-        { cuisine: "myRecipes", recipes: myRecipes },
-      ];
-      console.log("allRecipeCategories", allRecipeCategories);
-      dispatch(receiveRecipeCategories(allRecipeCategories));
+        const allRecipeCategories = [
+          ...recipeCategories,
+          { cuisine: "myRecipes", recipes: [...recipes] },
+        ];
+
+        console.log("allRecipeCategories", allRecipeCategories);
+        dispatch(receiveRecipeCategories(allRecipeCategories));
+      });
     }
   };
 }

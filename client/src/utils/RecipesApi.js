@@ -13,6 +13,10 @@ export async function getRecipeCategories(recipeCategoryIds) {
     .then((recipeCategories) => {
       console.log("recipeCategories", recipeCategories);
       return recipeCategories;
+    })
+    .catch((err) => {
+      console.log("API ERROR 🛑", err);
+      return err;
     });
 
   return data;

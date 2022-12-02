@@ -11,8 +11,8 @@ const db = {
         username: "nickhibbits",
         password: "password1",
         savedRecipes: [],
-        savedRecipeCategories: ["American", "Thai", "African"],
-        newUser: false,
+        savedRecipeCategories: [],
+        newUser: true,
       },
     },
     allIds: ["nickhibbits"],
@@ -67,7 +67,6 @@ export function addUserToDb(newUser) {
 export function updateUserCuisinesOnDb(username, updatedRecipeCategories) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      // need a different way to find the user in even they change their username
       db.users.byId[username].savedRecipeCategories = updatedRecipeCategories;
       resolve(db.users.byId[username]);
     }, 1000);

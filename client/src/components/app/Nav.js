@@ -38,8 +38,6 @@ function Nav({ auth }) {
 }
 
 function mapStateToProps({ auth }) {
-  console.log("auth", auth);
-
   return {
     auth,
   };

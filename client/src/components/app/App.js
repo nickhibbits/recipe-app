@@ -1,12 +1,13 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import { useEffect } from "react";
+
+import { setAuth } from "../../actions/auth";
+import { useLoadingCheck } from "../../utils/customHooks";
 import {
   handleGetRecipeCategories,
   handleGetUsers,
 } from "../../actions/shared";
-import { setAuth } from "../../actions/auth";
-import { useLoadingCheck } from "../../utils/customHooks";
 
 import Dashboard from "./Dashboard";
 import MyRecipes from "./MyRecipes";
@@ -42,6 +43,8 @@ function App({ dispatch, auth, users }) {
       if (loggedIn === true && users.byId[user].newUser === false) {
         const userRecipeCategories = users.byId[user].savedRecipeCategories;
         const savedRecipes = users.byId[user].savedRecipes;
+
+        console.log("App rerendered 🥞");
         dispatch(handleGetRecipeCategories(userRecipeCategories, savedRecipes));
       }
     }

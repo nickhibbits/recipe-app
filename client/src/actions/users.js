@@ -34,6 +34,7 @@ export function handleUpdateUserCuisines(user, updatedRecipeCategories) {
   };
 }
 
+// TODO research best practices for updating state and the database: keeping them consistent, order of updating, optimistic updates, etc
 export function handleSaveRecipe(username, recipeId) {
   console.log("action", { username, recipeId });
   return async (dispatch) => {
