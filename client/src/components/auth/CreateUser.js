@@ -49,15 +49,6 @@ function CreateUser(props) {
               onChange={() => setPassword(passwordInput.current.value)}
             />
           </div>
-          {/* <div className="form-field-wrapper">
-            <label className="verif-ypassword-label">Re-Type Password</label>
-            <input
-              ref={passwordInput}
-              type="text"
-              id="password-input"
-              onChange={() => setPassword(passwordInput.current.value)}
-            />
-          </div> */}
           <input
             type="submit"
             className="button submit-button"

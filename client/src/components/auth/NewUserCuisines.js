@@ -67,6 +67,8 @@ function NewUserCuisines({ dispatch, username, users }) {
     if (cuisines.length !== 0) {
       dispatch(handleUpdateUserCuisines(username, cuisines));
       setCuisinesSelected(true);
+      const userInfo = JSON.stringify({ ...users[username] });
+      localStorage.setItem("userInfo", userInfo);
     } else {
       alert("Must select cuisines to move on");
     }

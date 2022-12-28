@@ -22,30 +22,41 @@ function App({ dispatch, auth, users }) {
   const { loggedIn, user } = auth;
 
   const loading = useLoadingCheck(loggedIn);
-
-  useEffect(() => {
-    if (!loggedIn) {
-      dispatch(setAuth({ user, loggedIn }));
-    }
-  }, [dispatch, user, loggedIn]);
+  // localStorage.clear();
 
   useEffect(() => {
     dispatch(handleGetUsers());
   }, [dispatch]);
 
   useEffect(() => {
-    // TODO
-    // consider cleanup function to mitigate error when saving individual recipes
+    if (!loggedIn) {
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      console.log("userInfo", userInfo);
+
+      if (userInfo === null) {
+        dispatch(setAuth({ user, loggedIn }));
+      } else {
+        const { username } = userInfo;
+        dispatch(setAuth({ user: username, loggedIn: true }));
+      }
+    }
+  }, [dispatch, user, loggedIn]);
+
+  useEffect(() => {
     let mounted = true;
 
     if (mounted === true) {
       console.log("mounted", mounted);
-      if (loggedIn === true && users.byId[user].newUser === false) {
-        const userRecipeCategories = users.byId[user].savedRecipeCategories;
-        const savedRecipes = users.byId[user].savedRecipes;
+      if (loggedIn === true && Object.values(users).length !== 0) {
+        if (users.byId[user].newUser === false) {
+          const userRecipeCategories = users.byId[user].savedRecipeCategories;
+          const savedRecipes = users.byId[user].savedRecipes;
 
-        console.log("App rerendered 🥞");
-        dispatch(handleGetRecipeCategories(userRecipeCategories, savedRecipes));
+          console.log("App rerendered 🥞");
+          dispatch(
+            handleGetRecipeCategories(userRecipeCategories, savedRecipes)
+          );
+        }
       }
     }
 
