@@ -9,7 +9,6 @@ function MyRecipes({ recipeCategories }) {
     <main className="my-recipes-component component">
       <h1 className="page-heading">My Recipes</h1>
       <RecipeScrollContainer
-        //recipes needs to contain fetched data already, not just the ids
         recipes={_myRecipes}
         categoryTitle={"Saved Recipes"}
       />

@@ -7,9 +7,9 @@ import NewUserCuisines from "./auth/NewUserCuisines";
 
 import "../styles/App.scss";
 
-function Main() {
+function RoutesContainer() {
   return (
-    <div className="Main">
+    <div>
       <Routes>
         <Route path="/*" element={<App />} />
         <Route path="/auth/*" exact element={<Auth />} />
@@ -29,4 +29,4 @@ const mapStateToProps = ({ auth, users }) => {
     users,
   };
 };
-export default connect(mapStateToProps)(Main);
+export default connect(mapStateToProps)(RoutesContainer);
