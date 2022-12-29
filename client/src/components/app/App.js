@@ -28,20 +28,22 @@ function App({ dispatch, auth, users }) {
     dispatch(handleGetUsers());
   }, [dispatch]);
 
+  // login check
   useEffect(() => {
     if (!loggedIn) {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       console.log("userInfo", userInfo);
 
-      if (userInfo === null) {
+      if (!userInfo) {
         dispatch(setAuth({ user, loggedIn }));
       } else {
-        const { username } = userInfo;
-        dispatch(setAuth({ user: username, loggedIn: true }));
+        const { user } = userInfo;
+        dispatch(setAuth({ user, loggedIn: true }));
       }
     }
   }, [dispatch, user, loggedIn]);
 
+  // populate saved user recipes and recipeCategories
   useEffect(() => {
     let mounted = true;
 
@@ -53,6 +55,7 @@ function App({ dispatch, auth, users }) {
           const savedRecipes = users.byId[user].savedRecipes;
 
           console.log("App rerendered 🥞");
+
           dispatch(
             handleGetRecipeCategories(userRecipeCategories, savedRecipes)
           );
@@ -74,7 +77,11 @@ function App({ dispatch, auth, users }) {
     return <Navigate to={`/auth`} />;
   }
 
-  if (loggedIn) {
+  if (loggedIn && Object.keys(users).length !== 0) {
+    console.log("users fuckup", {
+      user: user,
+      newUserStatus: users.byId[user],
+    });
     if (users.byId[user].newUser) {
       return <Navigate to={`/new-user-cuisines`} />;
     }

@@ -23,7 +23,9 @@ function Login(props) {
     }
 
     if (props.users.byId[username].password === password) {
-      props.dispatch(setAuth({ user: username, loggedIn: true }));
+      const userInfo = { user: username, loggedIn: true };
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
+      props.dispatch(setAuth(userInfo));
     }
   };
 
