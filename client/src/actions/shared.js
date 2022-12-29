@@ -20,6 +20,10 @@ export function handleGetRecipeCategories(categoryIds, savedRecipes) {
     const recipeCategories = await getRecipeCategories(categoryIds).then(
       (_recipeCategories) => {
         console.log("_recipeCategories 👏", _recipeCategories);
+        localStorage.setItem(
+          "userRecipeCategories",
+          JSON.stringify(_recipeCategories)
+        );
         return _recipeCategories;
       }
     );

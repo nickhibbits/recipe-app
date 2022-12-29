@@ -17,6 +17,7 @@ import RecipeCharts from "./RecipeCharts";
 import UserProfile from "./UserProfile";
 
 import "../../styles/App.scss";
+import { receiveRecipeCategories } from "../../actions/recipeCategories";
 
 function App({ dispatch, auth, users }) {
   const { loggedIn, user } = auth;
@@ -32,7 +33,6 @@ function App({ dispatch, auth, users }) {
   useEffect(() => {
     if (!loggedIn) {
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      console.log("userInfo", userInfo);
 
       if (!userInfo) {
         dispatch(setAuth({ user, loggedIn }));
@@ -51,14 +51,18 @@ function App({ dispatch, auth, users }) {
       console.log("mounted", mounted);
       if (loggedIn === true && Object.values(users).length !== 0) {
         if (users.byId[user].newUser === false) {
-          const userRecipeCategories = users.byId[user].savedRecipeCategories;
-          const savedRecipes = users.byId[user].savedRecipes;
+          const storedCategories = localStorage.getItem("userRecipeCategories");
 
-          console.log("App rerendered 🥞");
+          if (!storedCategories) {
+            const userRecipeCategories = users.byId[user].savedRecipeCategories;
+            const savedRecipes = users.byId[user].savedRecipes;
 
-          dispatch(
-            handleGetRecipeCategories(userRecipeCategories, savedRecipes)
-          );
+            dispatch(
+              handleGetRecipeCategories(userRecipeCategories, savedRecipes)
+            );
+          } else {
+            dispatch(receiveRecipeCategories(JSON.parse(storedCategories)));
+          }
         }
       }
     }
