@@ -4,22 +4,31 @@
 
 .recipes-list {
   // height: auto;
+  --spacer: 1rem;
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 18rem;
-  gap: 1rem;
+  gap: var(--spacer);
   padding: 0.5rem 0;
   overflow-x: auto;
   overscroll-behavior-inline: contain;
+}
+
+.snaps-inline {
+  scroll-snap-type: inline mandatory;
+
+  > * {
+    scroll-snap-align: start;
+  }
 }
 
 .recipe-card {
   gap: 0;
   align-items: flex-end;
   min-height: 12rem;
-  min-width: 16rem;
+  min-width: 15rem;
   border-radius: 10px;
-  padding: 1rem;
+  padding: var(--spacer);
 }
 
 .recipe-title {

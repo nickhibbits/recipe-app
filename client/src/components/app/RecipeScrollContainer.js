@@ -7,7 +7,7 @@ function RecipeScrollContainer({ recipes, categoryTitle }) {
   return (
     <main className="recipe-scroll-container-component ">
       <h2 className="category-title">{categoryTitle}</h2>
-      <ul className="recipes-list">
+      <ul className="recipes-list snaps-inline">
         {Object.values(recipes).map((recipe, i) => {
           return (
             <Link to={`/recipeProfile/:${recipe.id}`} key={recipe.id}>
